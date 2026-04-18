@@ -246,10 +246,10 @@
             <h2>বই প্লাস ডিসকাউন্ট ক্যালকুলেটর</h2>
             <p class="hint">Choose a name from the suggested admin list when available.</p>
             <input id="bookName" type="text" placeholder="Book Name (Optional)">
-            <input id="mainPrice" type="number" placeholder="Main Price (TK)">
-            <input id="buyPrice" type="number" placeholder="Buy Price (TK)">
-            <input id="discount" type="number" placeholder="Discount %">
-            <input id="otherCost" type="number" placeholder="Others Expense (TK)">
+            <input id="mainPrice" type="text" placeholder="Main Price (TK) - English/Bangla">
+            <input id="buyPrice" type="text" placeholder="Buy Price (TK) - English/Bangla">
+            <input id="discount" type="text" placeholder="Discount % - English/Bangla">
+            <input id="otherCost" type="text" placeholder="Others Expense (TK) - English/Bangla">
             <input id="adderName" type="text" list="adminNames" placeholder="Your Name (Optional)">
             <datalist id="adminNames">
                 <option value="MD MEHEDI HASAN"></option>
@@ -277,6 +277,13 @@
     </div>
 
     <script>
+        // Function to convert Bangla digits to English digits
+        function convertToEnglishDigits(str) {
+            const banglaDigits = '০১২৩৪৫৬৭৮৯';
+            const englishDigits = '0123456789';
+            return str.replace(/[০-৯]/g, (match) => englishDigits[banglaDigits.indexOf(match)]);
+        }
+
         const admins = [
             "MD MEHEDI HASAN",
             "MD KHAIRUL ISLAM",
@@ -307,8 +314,8 @@
         const discountInput = document.getElementById('discount');
 
         function calculateDiscountFromPrices() {
-            const mainPrice = parseFloat(mainPriceInput.value);
-            const buyPrice = parseFloat(buyPriceInput.value);
+            const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value));
+            const buyPrice = parseFloat(convertToEnglishDigits(buyPriceInput.value));
             if (mainPrice > 0 && buyPrice >= 0) {
                 const discount = ((mainPrice - buyPrice) / mainPrice) * 100;
                 if (isFinite(discount)) {
@@ -318,8 +325,8 @@
         }
 
         function calculateBuyFromDiscount() {
-            const mainPrice = parseFloat(mainPriceInput.value);
-            const discount = parseFloat(discountInput.value);
+            const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value));
+            const discount = parseFloat(convertToEnglishDigits(discountInput.value));
             if (mainPrice > 0 && !isNaN(discount)) {
                 const buyPrice = mainPrice - (mainPrice * discount / 100);
                 if (isFinite(buyPrice)) {
@@ -354,10 +361,10 @@
 
         function generateMemo() {
             const bookName = document.getElementById('bookName').value.trim() || 'N/A';
-            const mainPrice = parseFloat(mainPriceInput.value) || 0;
-            const buyPrice = parseFloat(buyPriceInput.value) || 0;
-            const discount = parseFloat(discountInput.value) || 0;
-            const otherCost = parseFloat(document.getElementById('otherCost').value) || 0;
+            const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value)) || 0;
+            const buyPrice = parseFloat(convertToEnglishDigits(buyPriceInput.value)) || 0;
+            const discount = parseFloat(convertToEnglishDigits(discountInput.value)) || 0;
+            const otherCost = parseFloat(convertToEnglishDigits(document.getElementById('otherCost').value)) || 0;
             const adderName = document.getElementById('adderName').value.trim() || 'Anonymous';
             const user = userName || 'Guest';
 
