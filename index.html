@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boi Plus Admin Panel</title>
+    <style>
+        :root {
+            --bg: #070b17;
+            --card: rgba(12, 20, 45, 0.95);
+            --text: #e6f7ff;
+            --muted: #9cc9ff;
+            --accent: #3af0ff;
+            --accent-dark: #0b4f73;
+            --border: rgba(58, 240, 255, 0.20);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top left, #1e3f6d 0%, #070b17 45%, #02050d 100%);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            padding: 32px 20px 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 3vw, 3rem);
+            letter-spacing: 0.08em;
+        }
+
+        p.subtitle {
+            margin: 10px auto 0;
+            max-width: 760px;
+            color: var(--muted);
+            opacity: 0.9;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 24px;
+            padding: 20px;
+            max-width: 1240px;
+            margin: 0 auto 40px;
+        }
+
+        .panel, .calculator, .memo {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+            padding: 24px;
+            backdrop-filter: blur(14px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .box {
+            position: relative;
+            padding: 22px 18px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(180deg, rgba(33, 82, 151, 0.23), rgba(4, 11, 22, 0.8));
+            box-shadow: 0 0 28px rgba(58, 240, 255, 0.12);
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(58, 240, 255, 0.18), transparent 45%);
+            pointer-events: none;
+        }
+
+        .box h3 {
+            margin: 0 0 12px;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+        }
+
+        .box p {
+            margin: 0;
+            color: #c6e6ff;
+            line-height: 1.6;
+        }
+
+        .box span {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(58, 240, 255, 0.14);
+            color: #bbf4ff;
+            font-weight: 600;
+        }
+
+        .calculator input,
+        .calculator button,
+        .calculator select {
+            width: 100%;
+            margin-bottom: 14px;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+        }
+
+        .calculator input:focus,
+        .calculator button:focus {
+            outline: 2px solid rgba(58,240,255,0.35);
+            outline-offset: 2px;
+        }
+
+        .calculator button {
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, #3af0ff, #1a8dff);
+            color: #051e3c;
+            font-weight: 700;
+            transition: transform .22s ease, box-shadow .22s ease;
+        }
+
+        .calculator button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(58,240,255,0.28);
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+        }
+
+        .memo {
+            margin-top: 18px;
+        }
+
+        .memo header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .memo header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .memo-output {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 18px;
+            background: rgba(1, 13, 34, 0.9);
+            min-height: 260px;
+            color: #d9f4ff;
+            font-family: 'Consolas', 'Courier New', monospace;
+            letter-spacing: 0.01em;
+            line-height: 1.7;
+        }
+
+        .memo-output.empty {
+            opacity: 0.7;
+        }
+
+        .memo-line {
+            margin: 10px 0;
+        }
+
+        .memo-key {
+            color: #8ccfff;
+        }
+
+        .memo-value {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .memo-header {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: linear-gradient(90deg, rgba(58,240,255,0.24), rgba(70,105,186,0.3));
+            display: inline-flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .memo-header span {
+            color: #bdf6ff;
+            font-size: 0.95rem;
+        }
+
+        .print-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .print-row button {
+            flex: 1;
+        }
+
+        @media (max-width: 960px) {
+            .layout { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            body { background: #fff; color: #000; }
+            .panel, .calculator, .print-row, header p.subtitle { display: none; }
+            .memo { box-shadow: none; border: none; }
+            .memo-output { background: transparent; color: #000; font-family: sans-serif; }
+            .memo-header { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="welcomeMsg">মারহাবা ব্রো! তোমার Boi Plus অ্যাডমিন প্যানেলে স্বাগতম।</h1>
+        <p class="subtitle">"১০০০ টাকা করে জমা দেওয়া অ্যাডমিন মেম্বারদের তালিকা দেখুন। Boi Plus ডিসকাউন্ট ক্যালকুলেটর ব্যবহার করে মেমো তৈরি করুন এবং ক্যাশ রিসিট প্রিন্ট দিন।" 🤝✨.</p>
+    </header>
+
+    <div class="layout">
+        <section class="panel">
+            <h2>অ্যাডমিন মেম্বার লিস্ট</h2>
+            <div class="grid" id="adminGrid"></div>
+        </section>
+
+        <section class="calculator">
+            <h2>বই প্লাস ডিসকাউন্ট ক্যালকুলেটর</h2>
+            <p class="hint">Choose a name from the suggested admin list when available.</p>
+            <input id="bookName" type="text" placeholder="Book Name (Optional)">
+            <input id="mainPrice" type="number" placeholder="Main Price (TK)">
+            <input id="buyPrice" type="number" placeholder="Buy Price (TK)">
+            <input id="discount" type="number" placeholder="Discount %">
+            <input id="otherCost" type="number" placeholder="Others Expense (TK)">
+            <input id="adderName" type="text" list="adminNames" placeholder="Your Name (Optional)">
+            <datalist id="adminNames">
+                <option value="MD MEHEDI HASAN"></option>
+                <option value="MD KHAIRUL ISLAM"></option>
+                <option value="MD MMH TAMIM"></option>
+                <option value="WALID BIN ALI"></option>
+                <option value="MD RIPON SARKAR"></option>
+                <option value="MD NUR ALOM SIDDIK"></option>
+                <option value="SHAHRIAR HOSSAIN TABASSUM"></option>
+                <option value="MD RAJU AHMED JOY"></option>
+            </datalist>
+            <div class="print-row">
+                <button onclick="generateMemo()">মেমো তৈরি করুন 📝</button>
+                <button onclick="window.print()">মেমো প্রিন্ট করুন 🖨️</button>
+            </div>
+        </section>
+
+        <section class="memo">
+            <header>
+                <h2>Cash Memo Preview</h2>
+                <span>Color-coded receipt details</span>
+            </header>
+            <div id="memoOutput" class="memo-output empty">"বইয়ের বিস্তারিত তথ্য লিখুন এবং এখানে ক্যাশ মেমো দেখতে 'Generate Memo' বাটনে চাপ দিন।" 📖✨</div>
+        </section>
+    </div>
+
+    <script>
+        const admins = [
+            "MD MEHEDI HASAN",
+            "MD KHAIRUL ISLAM",
+            "MD MMH TAMIM",
+            "WALID BIN ALI",
+            "MD RIPON SARKAR",
+            "MD NUR ALOM SIDDIK",
+            "SHAHRIAR HOSSAIN TABASSUM",
+            "MD RAJU AHMED JOY"
+        ];
+
+        const userName = prompt('What is your name?');
+        const displayName = userName ? userName : 'Guest';
+        document.getElementById('welcomeMsg').textContent = `Welcome, ${displayName}! To Boi Plus Admin Panel`;
+
+        const adminGrid = document.getElementById('adminGrid');
+        admins.forEach((admin, index) => {
+            const box = document.createElement('div');
+            box.className = 'box';
+            const colors = ['#3af0ff', '#ff79d1', '#8fff6a', '#ffd56e', '#8c9cff', '#ff8c66', '#71f8d8', '#d276ff'];
+            box.style.borderColor = colors[index % colors.length];
+            box.innerHTML = `<h3>${admin}</h3><p>Admin Panel Member</p><span>Contribution: 1000 TK</span>`;
+            adminGrid.appendChild(box);
+        });
+
+        const mainPriceInput = document.getElementById('mainPrice');
+        const buyPriceInput = document.getElementById('buyPrice');
+        const discountInput = document.getElementById('discount');
+
+        function calculateDiscountFromPrices() {
+            const mainPrice = parseFloat(mainPriceInput.value);
+            const buyPrice = parseFloat(buyPriceInput.value);
+            if (mainPrice > 0 && buyPrice >= 0) {
+                const discount = ((mainPrice - buyPrice) / mainPrice) * 100;
+                if (isFinite(discount)) {
+                    discountInput.value = discount.toFixed(2);
+                }
+            }
+        }
+
+        function calculateBuyFromDiscount() {
+            const mainPrice = parseFloat(mainPriceInput.value);
+            const discount = parseFloat(discountInput.value);
+            if (mainPrice > 0 && !isNaN(discount)) {
+                const buyPrice = mainPrice - (mainPrice * discount / 100);
+                if (isFinite(buyPrice)) {
+                    buyPriceInput.value = buyPrice.toFixed(2);
+                }
+            }
+        }
+
+        mainPriceInput.addEventListener('input', () => {
+            if (buyPriceInput.value) {
+                calculateDiscountFromPrices();
+            } else if (discountInput.value) {
+                calculateBuyFromDiscount();
+            }
+        });
+
+        buyPriceInput.addEventListener('input', () => {
+            if (mainPriceInput.value) {
+                calculateDiscountFromPrices();
+            }
+        });
+
+        discountInput.addEventListener('input', () => {
+            if (mainPriceInput.value) {
+                calculateBuyFromDiscount();
+            }
+        });
+
+        function formatLine(label, value) {
+            return `<div class="memo-line"><span class="memo-key">${label}</span> <span class="memo-value">${value}</span></div>`;
+        }
+
+        function generateMemo() {
+            const bookName = document.getElementById('bookName').value.trim() || 'N/A';
+            const mainPrice = parseFloat(mainPriceInput.value) || 0;
+            const buyPrice = parseFloat(buyPriceInput.value) || 0;
+            const discount = parseFloat(discountInput.value) || 0;
+            const otherCost = parseFloat(document.getElementById('otherCost').value) || 0;
+            const adderName = document.getElementById('adderName').value.trim() || 'Anonymous';
+            const user = userName || 'Guest';
+
+            if (!mainPrice || !buyPrice) {
+                alert('Please enter both Main Price and Buy Price or Discount.');
+                return;
+            }
+
+            const discountAmount = parseFloat((mainPrice * discount / 100).toFixed(2));
+            const priceAfterDiscount = parseFloat((mainPrice - discountAmount).toFixed(2));
+            const totalCost = parseFloat((priceAfterDiscount + otherCost).toFixed(2));
+            const profit = parseFloat((priceAfterDiscount - buyPrice).toFixed(2));
+
+            const memoOutput = document.getElementById('memoOutput');
+            memoOutput.innerHTML = `
+                <div class="memo-header">
+                    <div><strong>বই প্লাস ক্যাশ মেমো</strong></div>
+                    <span>${new Date().toLocaleString()}</span>
+                </div>
+                ${formatLine('অ্যাডমিন লগইন	🔐:', user)}
+                ${formatLine('প্রস্তুতকারক	✍️:', adderName)}
+                ${formatLine('বইয়ের নাম	📖:', bookName)}
+                ${formatLine('গায়ের মূল্য (MRP)	🏷️:', `${mainPrice.toFixed(2)} TK`)}
+                ${formatLine('ক্রয় মূল্য	💰:', `${buyPrice.toFixed(2)} TK`)}
+                ${formatLine('Discount %:', `${discount.toFixed(2)} %`)}
+                ${formatLine('Discount Amount:', `${discountAmount.toFixed(2)} TK`)}
+                ${formatLine('Price After Discount:', `${priceAfterDiscount.toFixed(2)} TK`)}
+                ${formatLine('অন্যান্য খরচ	🚚:', `${otherCost.toFixed(2)} TK`)}
+                ${formatLine('মোট প্রদেয় টাকা	✅:', `${totalCost.toFixed(2)} TK`)}
+                ${formatLine('লাভ / ক্ষতি	📊:', `${profit.toFixed(2)} TK`)}
+                <div class="memo-line" style="margin-top:18px;color:#8cffb8;">Note: This memo can be printed by using the Print button(🛠️🛡️Design_by_MMHT📊).</div>
+            `;
+            memoOutput.classList.remove('empty');
+        }
+    </script>
+</body>
+</html>
