@@ -3,255 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <title>Boi Plus Admin Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #070b17;
-            --card: rgba(12, 20, 45, 0.95);
+            --card: rgba(10, 16, 40, 0.92);
             --text: #e6f7ff;
             --muted: #9cc9ff;
             --accent: #3af0ff;
-            --accent-dark: #0b4f73;
             --border: rgba(58, 240, 255, 0.20);
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            margin: 0;
             min-height: 100vh;
-            background: radial-gradient(circle at top left, #1e3f6d 0%, #070b17 45%, #02050d 100%);
+            background: #070b17;
+            background-image:
+                radial-gradient(ellipse at top left, rgba(30,63,109,0.7) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(80,20,120,0.5) 0%, transparent 50%);
             color: var(--text);
-            font-family: 'Noto Sans Bengali', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Animated BG particles */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(1px 1px at 20% 30%, rgba(58,240,255,0.4), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(255,120,220,0.4), transparent),
+                radial-gradient(1px 1px at 60% 80%, rgba(100,200,255,0.3), transparent),
+                radial-gradient(1px 1px at 10% 90%, rgba(130,100,255,0.4), transparent);
+            pointer-events: none;
+            z-index: 0;
         }
 
         header {
-            padding: 32px 20px 10px;
+            padding: 40px 20px 16px;
             text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 999px;
+            background: rgba(58,240,255,0.1);
+            border: 1px solid rgba(58,240,255,0.3);
+            color: var(--accent);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
 
         h1 {
-            margin: 0;
-            font-size: clamp(2rem, 3vw, 3rem);
-            letter-spacing: 0.08em;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            letter-spacing: 0.04em;
+            background: linear-gradient(135deg, #fff 0%, #3af0ff 50%, #bf7fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
         }
 
         p.subtitle {
-            margin: 10px auto 0;
             max-width: 760px;
+            margin: 0 auto;
             color: var(--muted);
-            opacity: 0.9;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .layout {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
             gap: 24px;
-            padding: 20px;
+            padding: 24px 20px;
             max-width: 1240px;
             margin: 0 auto 40px;
+            position: relative;
+            z-index: 1;
         }
 
         .panel, .calculator, .memo {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 24px;
-            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
-            padding: 24px;
-            backdrop-filter: blur(14px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;
+            padding: 28px;
+            backdrop-filter: blur(20px);
         }
 
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 22px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, #3af0ff, #bf7fff);
+            display: inline-block;
+        }
+
+        /* Admin Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
         }
 
         .box {
             position: relative;
-            padding: 22px 18px;
-            border-radius: 20px;
+            padding: 20px 16px;
+            border-radius: 18px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(180deg, rgba(33, 82, 151, 0.23), rgba(4, 11, 22, 0.8));
-            box-shadow: 0 0 28px rgba(58, 240, 255, 0.12);
+            border: 1.5px solid;
+            background: rgba(5, 12, 30, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .box:hover {
+            transform: translateY(-4px) scale(1.02);
         }
 
         .box::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at top left, rgba(58, 240, 255, 0.18), transparent 45%);
+            background: radial-gradient(circle at top left, var(--glow-color, rgba(58,240,255,0.15)), transparent 60%);
             pointer-events: none;
         }
 
-        .box h3 {
-            margin: 0 0 12px;
-            font-size: 1.05rem;
-            letter-spacing: 0.02em;
-        }
-
-        .box p {
-            margin: 0;
-            color: #c6e6ff;
-            line-height: 1.6;
-        }
-
-        .box span {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(58, 240, 255, 0.14);
-            color: #bbf4ff;
-            font-weight: 600;
-        }
-
-        .calculator input,
-        .calculator button,
-        .calculator select {
-            width: 100%;
-            margin-bottom: 14px;
-            padding: 14px 16px;
-            font-size: 0.95rem;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.14);
-            background: rgba(255,255,255,0.04);
-            color: var(--text);
-            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
-        }
-
-        .calculator input:focus,
-        .calculator button:focus {
-            outline: 2px solid rgba(58,240,255,0.35);
-            outline-offset: 2px;
-        }
-
-        .calculator button {
-            cursor: pointer;
-            border: none;
-            background: linear-gradient(135deg, #3af0ff, #1a8dff);
-            color: #051e3c;
-            font-weight: 700;
-            transition: transform .22s ease, box-shadow .22s ease;
-        }
-
-        .calculator button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 12px 24px rgba(58,240,255,0.28);
-        }
-
-        .hint {
-            color: var(--muted);
-            font-size: 0.88rem;
+        .box .box-icon {
+            font-size: 1.5rem;
             margin-bottom: 10px;
         }
 
-        .memo {
-            margin-top: 18px;
+        .box h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            margin-bottom: 6px;
+            color: #fff;
         }
 
-        .memo header {
+        .box p {
+            font-size: 0.78rem;
+            color: #8eaacc;
+            margin-bottom: 10px;
+        }
+
+        .box .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        /* RGB animated border on hover */
+        .box::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.06));
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .box:hover::after { opacity: 1; }
+
+        /* Calculator */
+        .calculator input,
+        .calculator select {
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 13px 16px;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .calculator input:focus {
+            outline: none;
+            border-color: rgba(58,240,255,0.5);
+            box-shadow: 0 0 0 3px rgba(58,240,255,0.1);
+        }
+
+        .calculator input::placeholder { color: rgba(156,201,255,0.5); }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            font-size: 0.95rem;
+            border-radius: 14px;
+            border: none;
+            background: linear-gradient(135deg, #3af0ff 0%, #1a7eff 50%, #a855f7 100%);
+            color: #05111f;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(58,240,255,0.3); }
+        .btn-primary:hover::before { opacity: 1; }
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 13px;
+            font-size: 0.92rem;
+            border-radius: 14px;
+            border: 1px solid rgba(58,240,255,0.3);
+            background: rgba(58,240,255,0.06);
+            color: var(--accent);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+        }
+
+        .btn-secondary:hover { background: rgba(58,240,255,0.12); border-color: rgba(58,240,255,0.5); }
+
+        .hint {
+            color: var(--muted);
+            font-size: 0.82rem;
+            margin-bottom: 14px;
+            padding: 8px 12px;
+            background: rgba(58,240,255,0.05);
+            border-left: 3px solid rgba(58,240,255,0.4);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Memo */
+        .memo-header-bar {
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: linear-gradient(90deg, rgba(58,240,255,0.15), rgba(168,85,247,0.15));
+            border: 1px solid rgba(58,240,255,0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .memo header h2 {
-            margin: 0;
-            font-size: 1.25rem;
-        }
+        .memo-header-bar strong { color: #fff; font-size: 0.95rem; }
+        .memo-header-bar span { color: #7eb8ff; font-size: 0.82rem; }
 
         .memo-output {
-            margin-top: 20px;
             padding: 20px;
-            border-radius: 18px;
-            background: rgba(1, 13, 34, 0.9);
-            min-height: 260px;
+            border-radius: 16px;
+            background: rgba(1, 8, 24, 0.85);
+            min-height: 240px;
             color: #d9f4ff;
             font-family: 'Consolas', 'Courier New', monospace;
-            letter-spacing: 0.01em;
-            line-height: 1.7;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            border: 1px solid rgba(58,240,255,0.08);
         }
 
         .memo-output.empty {
-            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: rgba(156,201,255,0.5);
+            font-family: 'Noto Sans Bengali', sans-serif;
         }
 
         .memo-line {
-            margin: 10px 0;
-        }
-
-        .memo-key {
-            color: #8ccfff;
-        }
-
-        .memo-value {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        .memo-header {
-            padding: 14px 16px;
-            border-radius: 16px;
-            background: linear-gradient(90deg, rgba(58,240,255,0.24), rgba(70,105,186,0.3));
-            display: inline-flex;
-            width: 100%;
+            display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
         }
 
-        .memo-header span {
-            color: #bdf6ff;
-            font-size: 0.95rem;
+        .memo-line:last-child { border-bottom: none; }
+        .memo-key { color: #7eb8ff; font-size: 0.85rem; }
+        .memo-value { color: #fff; font-weight: 700; font-size: 0.88rem; }
+
+        .memo-divider {
+            border: none;
+            border-top: 1px dashed rgba(58,240,255,0.2);
+            margin: 12px 0;
         }
+
+        .memo-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgba(58,240,255,0.12), rgba(168,85,247,0.12));
+            margin-top: 8px;
+        }
+
+        .memo-total .memo-key { color: #3af0ff; font-weight: 700; }
+        .memo-total .memo-value { color: #3af0ff; font-size: 1rem; }
+
+        .memo-profit-positive { color: #4ade80 !important; }
+        .memo-profit-negative { color: #f87171 !important; }
 
         .print-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 16px;
         }
 
-        .print-row button {
-            flex: 1;
-        }
+        .memo-section { grid-column: 1 / -1; }
 
         @media (max-width: 960px) {
             .layout { grid-template-columns: 1fr; }
+            .memo-section { grid-column: 1; }
         }
 
         @media print {
             body { background: #fff; color: #000; }
-            .panel, .calculator, .print-row, header p.subtitle { display: none; }
-            .memo { box-shadow: none; border: none; }
-            .memo-output { background: transparent; color: #000; font-family: sans-serif; min-height: auto; }
+            .panel, .calculator, .print-row, header p.subtitle, .header-badge { display: none; }
+            .memo { box-shadow: none; border: none; background: #fff; }
+            .memo-output { background: transparent; color: #000; }
+            .memo-key { color: #333; }
+            .memo-value { color: #000; }
         }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+        ::-webkit-scrollbar-thumb { background: rgba(58,240,255,0.2); border-radius: 6px; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 id="welcomeMsg">মারহাবা ব্রো! তোমার Boi Plus অ্যাডমিন প্যানেলে স্বাগতম।</h1>
-        <p class="subtitle">"১০০০ টাকা করে জমা দেওয়া অ্যাডমিন মেম্বারদের তালিকা দেখুন। Boi Plus ডিসকাউন্ট ক্যালকুলেটর ব্যবহার করে মেমো তৈরি করুন এবং ক্যাশ রিসিট প্রিন্ট দিন।" 🤝✨.</p>
+        <div class="header-badge">⚡ BOI PLUS SECURE ADMIN</div>
+        <h1 id="welcomeMsg">মারহাবা! Boi Plus অ্যাডমিন প্যানেলে স্বাগতম।</h1>
+        <p class="subtitle">১০০০ টাকা করে জমা দেওয়া অ্যাডমিন মেম্বারদের তালিকা দেখুন। ডিসকাউন্ট ক্যালকুলেটর দিয়ে মেমো তৈরি করুন এবং প্রিন্ট দিন। 🤝✨</p>
     </header>
 
     <div class="layout">
+        <!-- Admin List -->
         <section class="panel">
-            <h2>অ্যাডমিন মেম্বার লিস্ট</h2>
+            <div class="section-title">অ্যাডমিন মেম্বার লিস্ট</div>
             <div class="grid" id="adminGrid"></div>
         </section>
 
+        <!-- Calculator -->
         <section class="calculator">
-            <h2>বই প্লাস ডিসকাউন্ট ক্যালকুলেটর</h2>
-            <p class="hint">Choose a name from the suggested admin list when available.</p>
-            <input id="bookName" type="text" placeholder="Book Name (Optional)">
-            <input id="mainPrice" type="text" placeholder="Main Price (TK) - English/Bangla">
-            <input id="buyPrice" type="text" placeholder="Buy Price (TK) - English/Bangla">
-            <input id="discount" type="text" placeholder="Discount % - English/Bangla">
-            <input id="otherCost" type="text" placeholder="Others Expense (TK) - English/Bangla">
-            <input id="adderName" type="text" list="adminNames" placeholder="Your Name (Optional)">
+            <div class="section-title">ডিসকাউন্ট ক্যালকুলেটর</div>
+            <p class="hint">💡 নাম লিখলে suggestion আসবে</p>
+            <input id="bookName" type="text" placeholder="📖 বইয়ের নাম (Optional)">
+            <input id="mainPrice" type="text" placeholder="🏷️ গায়ের মূল্য (TK)">
+            <input id="buyPrice" type="text" placeholder="💰 ক্রয় মূল্য (TK)">
+            <input id="discount" type="text" placeholder="🔖 ডিসকাউন্ট %">
+            <input id="otherCost" type="text" placeholder="🚚 অন্যান্য খরচ (TK)">
+            <input id="adderName" type="text" list="adminNames" placeholder="✍️ আপনার নাম (Optional)">
             <datalist id="adminNames">
                 <option value="MD MEHEDI HASAN"></option>
                 <option value="MD KHAIRUL ISLAM"></option>
@@ -262,143 +405,138 @@
                 <option value="SHAHRIAR HOSSAIN TABASSUM"></option>
                 <option value="MD RAJU AHMED JOY"></option>
             </datalist>
-            <div class="print-row">
-                <button onclick="generateMemo()">মেমো তৈরি করুন 📝</button>
-                <button onclick="window.print()">মেমো প্রিন্ট করুন 🖨️</button>
-            </div>
+            <button class="btn-primary" onclick="generateMemo()">📝 মেমো তৈরি করুন</button>
+            <button class="btn-secondary" onclick="window.print()">🖨️ মেমো প্রিন্ট করুন</button>
         </section>
 
-        <section class="memo">
-            <header>
-                <h2>Cash Memo Preview</h2>
-                <span>Color-coded receipt details</span>
-            </header>
-            <div id="memoOutput" class="memo-output empty">"বইয়ের বিস্তারিত তথ্য লিখুন এবং এখানে ক্যাশ মেমো দেখতে 'Generate Memo' বাটনে চাপ দিন।" 📖✨</div>
+        <!-- Memo -->
+        <section class="memo memo-section">
+            <div class="section-title">Cash Memo Preview</div>
+            <div id="memoOutput" class="memo-output empty">বইয়ের তথ্য লিখুন এবং "মেমো তৈরি করুন" বাটনে চাপ দিন 📖✨</div>
         </section>
     </div>
 
     <script>
-        // Function to convert Bangla digits to English digits
         function convertToEnglishDigits(str) {
-            const banglaDigits = '০১২৩৪৫৬৭৮৯';
-            const englishDigits = '0123456789';
-            return str.replace(/[০-৯]/g, (match) => englishDigits[banglaDigits.indexOf(match)]);
+            const b = '০১২৩৪৫৬৭৮৯';
+            const e = '0123456789';
+            return String(str).replace(/[০-৯]/g, m => e[b.indexOf(m)]);
         }
 
         const admins = [
-            "MD MEHEDI HASAN",
-            "MD KHAIRUL ISLAM",
-            "MD MMH TAMIM",
-            "WALID BIN ALI",
-            "MD RIPON SARKAR",
-            "MD NUR ALOM SIDDIK",
-            "SHAHRIAR HOSSAIN TABASSUM",
-            "MD RAJU AHMED JOY"
+            { name: "MD MEHEDI HASAN",           icon: "👑", color: "#3af0ff", glow: "rgba(58,240,255,0.18)" },
+            { name: "MD KHAIRUL ISLAM",           icon: "🔥", color: "#ff79d1", glow: "rgba(255,121,209,0.18)" },
+            { name: "MD MMH TAMIM",               icon: "⚡", color: "#8fff6a", glow: "rgba(143,255,106,0.18)" },
+            { name: "WALID BIN ALI",              icon: "💎", color: "#ffd56e", glow: "rgba(255,213,110,0.18)" },
+            { name: "MD RIPON SARKAR",            icon: "🚀", color: "#a78bff", glow: "rgba(167,139,255,0.18)" },
+            { name: "MD NUR ALOM SIDDIK",         icon: "🌟", color: "#ff8c66", glow: "rgba(255,140,102,0.18)" },
+            { name: "SHAHRIAR HOSSAIN TABASSUM",  icon: "🎯", color: "#71f8d8", glow: "rgba(113,248,216,0.18)" },
+            { name: "MD RAJU AHMED JOY",          icon: "🏆", color: "#d276ff", glow: "rgba(210,118,255,0.18)" }
         ];
 
-        const userName = prompt('What is your name?');
-        const displayName = userName ? userName : 'Guest';
-        document.getElementById('welcomeMsg').textContent = `Welcome, ${displayName}! To Boi Plus Admin Panel`;
+        const userName = prompt('আপনার নাম কী? (What is your name?)');
+        const displayName = userName ? userName.trim() : 'Guest';
+        document.getElementById('welcomeMsg').textContent = `স্বাগতম, ${displayName}! Boi Plus Admin Panel-এ আপনাকে স্বাগতম 🎉`;
 
         const adminGrid = document.getElementById('adminGrid');
-        admins.forEach((admin, index) => {
+        admins.forEach(admin => {
             const box = document.createElement('div');
             box.className = 'box';
-            const colors = ['#3af0ff', '#ff79d1', '#8fff6a', '#ffd56e', '#8c9cff', '#ff8c66', '#71f8d8', '#d276ff'];
-            box.style.borderColor = colors[index % colors.length];
-            box.innerHTML = `<h3>${admin}</h3><p>Admin Panel Member</p><span>Contribution: 1000 TK</span>`;
+            box.style.borderColor = admin.color;
+            box.style.setProperty('--glow-color', admin.glow);
+            box.style.boxShadow = `0 0 20px ${admin.glow}, 0 4px 20px rgba(0,0,0,0.3)`;
+            box.innerHTML = `
+                <div class="box-icon">${admin.icon}</div>
+                <h3 style="color:${admin.color}">${admin.name}</h3>
+                <p>Admin Panel Member</p>
+                <span class="badge" style="color:${admin.color};border-color:${admin.color}40">💵 1000 TK</span>
+            `;
             adminGrid.appendChild(box);
         });
 
         const mainPriceInput = document.getElementById('mainPrice');
-        const buyPriceInput = document.getElementById('buyPrice');
-        const discountInput = document.getElementById('discount');
+        const buyPriceInput  = document.getElementById('buyPrice');
+        const discountInput  = document.getElementById('discount');
 
-        function calculateDiscountFromPrices() {
-            const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value));
-            const buyPrice = parseFloat(convertToEnglishDigits(buyPriceInput.value));
-            if (mainPrice > 0 && buyPrice >= 0) {
-                const discount = ((mainPrice - buyPrice) / mainPrice) * 100;
-                if (isFinite(discount)) {
-                    discountInput.value = discount.toFixed(2);
-                }
+        function calcDiscountFromPrices() {
+            const m = parseFloat(convertToEnglishDigits(mainPriceInput.value));
+            const b = parseFloat(convertToEnglishDigits(buyPriceInput.value));
+            if (m > 0 && b >= 0) {
+                const d = ((m - b) / m) * 100;
+                if (isFinite(d)) discountInput.value = d.toFixed(2);
             }
         }
 
-        function calculateBuyFromDiscount() {
-            const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value));
-            const discount = parseFloat(convertToEnglishDigits(discountInput.value));
-            if (mainPrice > 0 && !isNaN(discount)) {
-                const buyPrice = mainPrice - (mainPrice * discount / 100);
-                if (isFinite(buyPrice)) {
-                    buyPriceInput.value = buyPrice.toFixed(2);
-                }
+        function calcBuyFromDiscount() {
+            const m = parseFloat(convertToEnglishDigits(mainPriceInput.value));
+            const d = parseFloat(convertToEnglishDigits(discountInput.value));
+            if (m > 0 && !isNaN(d)) {
+                const b = m - (m * d / 100);
+                if (isFinite(b)) buyPriceInput.value = b.toFixed(2);
             }
         }
 
         mainPriceInput.addEventListener('input', () => {
-            if (buyPriceInput.value) {
-                calculateDiscountFromPrices();
-            } else if (discountInput.value) {
-                calculateBuyFromDiscount();
-            }
+            if (buyPriceInput.value) calcDiscountFromPrices();
+            else if (discountInput.value) calcBuyFromDiscount();
         });
+        buyPriceInput.addEventListener('input', () => { if (mainPriceInput.value) calcDiscountFromPrices(); });
+        discountInput.addEventListener('input', () => { if (mainPriceInput.value) calcBuyFromDiscount(); });
 
-        buyPriceInput.addEventListener('input', () => {
-            if (mainPriceInput.value) {
-                calculateDiscountFromPrices();
-            }
-        });
-
-        discountInput.addEventListener('input', () => {
-            if (mainPriceInput.value) {
-                calculateBuyFromDiscount();
-            }
-        });
-
-        function formatLine(label, value) {
-            return `<div class="memo-line"><span class="memo-key">${label}</span> <span class="memo-value">${value}</span></div>`;
+        function line(label, value, extraClass = '') {
+            return `<div class="memo-line">
+                <span class="memo-key">${label}</span>
+                <span class="memo-value ${extraClass}">${value}</span>
+            </div>`;
         }
 
         function generateMemo() {
-            const bookName = document.getElementById('bookName').value.trim() || 'N/A';
+            const bookName  = document.getElementById('bookName').value.trim() || 'N/A';
             const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value)) || 0;
-            const buyPrice = parseFloat(convertToEnglishDigits(buyPriceInput.value)) || 0;
-            const discount = parseFloat(convertToEnglishDigits(discountInput.value)) || 0;
+            const buyPrice  = parseFloat(convertToEnglishDigits(buyPriceInput.value))  || 0;
+            const discount  = parseFloat(convertToEnglishDigits(discountInput.value))  || 0;
             const otherCost = parseFloat(convertToEnglishDigits(document.getElementById('otherCost').value)) || 0;
             const adderName = document.getElementById('adderName').value.trim() || 'Anonymous';
-            const user = userName || 'Guest';
 
             if (!mainPrice || !buyPrice) {
-                alert('Please enter both Main Price and Buy Price or Discount.');
+                alert('⚠️ Main Price এবং Buy Price অবশ্যই দিতে হবে।');
                 return;
             }
 
-            const discountAmount = parseFloat((mainPrice * discount / 100).toFixed(2));
-            const priceAfterDiscount = parseFloat((mainPrice - discountAmount).toFixed(2));
-            const totalCost = parseFloat((priceAfterDiscount + otherCost).toFixed(2));
-            const profit = parseFloat((priceAfterDiscount - buyPrice).toFixed(2));
+            const discountAmount    = +(mainPrice * discount / 100).toFixed(2);
+            const priceAfterDiscount = +(mainPrice - discountAmount).toFixed(2);
+            const totalCost         = +(priceAfterDiscount + otherCost).toFixed(2);
+            const profit            = +(priceAfterDiscount - buyPrice).toFixed(2);
+            const profitClass       = profit >= 0 ? 'memo-profit-positive' : 'memo-profit-negative';
+            const profitLabel       = profit >= 0 ? '📈 লাভ' : '📉 ক্ষতি';
 
-            const memoOutput = document.getElementById('memoOutput');
-            memoOutput.innerHTML = `
-                <div class="memo-header">
-                    <div><strong>বই প্লাস ক্যাশ মেমো</strong></div>
-                    <span>${new Date().toLocaleString()}</span>
+            const out = document.getElementById('memoOutput');
+            out.classList.remove('empty');
+            out.innerHTML = `
+                <div class="memo-header-bar">
+                    <strong>📋 বই প্লাস ক্যাশ মেমো</strong>
+                    <span>${new Date().toLocaleString('bn-BD')}</span>
                 </div>
-                ${formatLine('অ্যাডমিন লগইন	🔐:', user)}
-                ${formatLine('প্রস্তুতকারক	✍️:', adderName)}
-                ${formatLine('বইয়ের নাম	📖:', bookName)}
-                ${formatLine('গায়ের মূল্য (MRP)	🏷️:', `${mainPrice.toFixed(2)} TK`)}
-                ${formatLine('ক্রয় মূল্য	💰:', `${buyPrice.toFixed(2)} TK`)}
-                ${formatLine('Discount %:', `${discount.toFixed(2)} %`)}
-                ${formatLine('Discount Amount:', `${discountAmount.toFixed(2)} TK`)}
-                ${formatLine('Price After Discount:', `${priceAfterDiscount.toFixed(2)} TK`)}
-                ${formatLine('অন্যান্য খরচ	🚚:', `${otherCost.toFixed(2)} TK`)}
-                ${formatLine('মোট প্রদেয় টাকা	✅:', `${totalCost.toFixed(2)} TK`)}
-                ${formatLine('লাভ / ক্ষতি	📊:', `${profit.toFixed(2)} TK`)}
-                <div class="memo-line" style="margin-top:18px;color:#8cffb8;">Note: This memo can be printed by using the Print button(🛠️🛡️Design_by_MMHT📊).</div>
+                ${line('🔐 অ্যাডমিন লগইন', displayName)}
+                ${line('✍️ প্রস্তুতকারক', adderName)}
+                ${line('📖 বইয়ের নাম', bookName)}
+                <hr class="memo-divider">
+                ${line('🏷️ গায়ের মূল্য (MRP)', mainPrice.toFixed(2) + ' TK')}
+                ${line('💰 ক্রয় মূল্য', buyPrice.toFixed(2) + ' TK')}
+                ${line('🔖 ডিসকাউন্ট %', discount.toFixed(2) + ' %')}
+                ${line('💸 ডিসকাউন্ট পরিমাণ', discountAmount.toFixed(2) + ' TK')}
+                ${line('✅ ডিসকাউন্ট পরবর্তী মূল্য', priceAfterDiscount.toFixed(2) + ' TK')}
+                ${line('🚚 অন্যান্য খরচ', otherCost.toFixed(2) + ' TK')}
+                <hr class="memo-divider">
+                <div class="memo-total">
+                    <span class="memo-key">💵 মোট প্রদেয় টাকা</span>
+                    <span class="memo-value">${totalCost.toFixed(2)} TK</span>
+                </div>
+                ${line(profitLabel, Math.abs(profit).toFixed(2) + ' TK', profitClass)}
+                <div class="memo-line" style="margin-top:16px;justify-content:center;color:rgba(156,201,255,0.5);font-size:0.78rem;">
+                    🛠️ Design by MMHT 📊 | Print করতে উপরের বাটন ব্যবহার করুন
+                </div>
             `;
-            memoOutput.classList.remove('empty');
         }
     </script>
 </body>
