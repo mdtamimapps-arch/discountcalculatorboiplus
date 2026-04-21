@@ -773,6 +773,289 @@
             font-size: 0.78rem;
             color: rgba(156, 201, 255, 0.4);
         }
+
+        /* ===== PROCESSING OVERLAY ===== */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes calcPop {
+            0% {
+                transform: scale(0.7) rotateY(90deg);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.08) rotateY(-5deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotateY(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes barFill {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes resultSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        #processingOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 8888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(4, 8, 20, 0.82);
+            backdrop-filter: blur(10px);
+            animation: backdropIn 0.3s ease;
+        }
+
+        .proc-box {
+            background: linear-gradient(145deg, rgba(7, 11, 30, 0.98), rgba(15, 22, 55, 0.98));
+            border: 2px solid #3af0ff;
+            border-radius: 24px;
+            padding: 40px 48px;
+            text-align: center;
+            animation: calcPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            min-width: 280px;
+        }
+
+        .proc-calc-icon {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 20px rgba(58, 240, 255, 0.7));
+        }
+
+        .proc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #3af0ff;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .proc-bar-wrap {
+            background: rgba(58, 240, 255, 0.08);
+            border-radius: 99px;
+            height: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .proc-bar {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, #3af0ff, #a855f7, #ff79d1, #3af0ff);
+            background-size: 200% auto;
+            animation: barFill 1.1s ease forwards, shimmer 1.5s linear infinite;
+        }
+
+        .proc-steps {
+            font-size: 0.8rem;
+            color: rgba(156, 201, 255, 0.6);
+            min-height: 1.2em;
+        }
+
+        /* ===== ANIMATED MEMO RESULT ===== */
+        .memo-line {
+            animation: resultSlide 0.35s ease both;
+        }
+
+        .memo-line:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .memo-line:nth-child(2) {
+            animation-delay: 0.10s;
+        }
+
+        .memo-line:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .memo-line:nth-child(4) {
+            animation-delay: 0.20s;
+        }
+
+        .memo-line:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .memo-line:nth-child(6) {
+            animation-delay: 0.30s;
+        }
+
+        .memo-line:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .memo-total {
+            animation: countUp 0.5s 0.45s ease both;
+        }
+
+        /* ===== ADMIN FUND TRACKER ===== */
+        .fund-section {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(58, 240, 255, 0.12);
+        }
+
+        .fund-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fund-total-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(58, 240, 255, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid rgba(58, 240, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+        }
+
+        .fund-total-label {
+            color: #9cc9ff;
+            font-size: 0.85rem;
+        }
+
+        .fund-total-val {
+            font-size: 1.15rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #3af0ff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fund-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .fund-row:last-child {
+            border-bottom: none;
+        }
+
+        .fund-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .fund-name {
+            flex: 1;
+            font-size: 0.82rem;
+            color: #cce8ff;
+            font-weight: 600;
+        }
+
+        .fund-amount-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fund-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            border: 1px solid rgba(58, 240, 255, 0.25);
+            background: rgba(58, 240, 255, 0.07);
+            color: #3af0ff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s, border-color 0.15s;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .fund-btn:hover {
+            background: rgba(58, 240, 255, 0.18);
+            border-color: #3af0ff;
+        }
+
+        .fund-input {
+            width: 72px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(58, 240, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .fund-input:focus {
+            outline: none;
+            border-color: #3af0ff;
+        }
+
+        .fund-tk {
+            color: #9cc9ff;
+            font-size: 0.78rem;
+        }
     </style>
 </head>
 
@@ -783,6 +1066,17 @@
         <h1 id="welcomeMsg">মারহাবা! Boi Plus অ্যাডমিন প্যানেলে স্বাগতম।</h1>
         <p class="subtitle">১০০০ টাকা করে জমা দেওয়া অ্যাডমিন মেম্বারদের তালিকা দেখুন। ডিসকাউন্ট ক্যালকুলেটর দিয়ে মেমো
             তৈরি করুন এবং প্রিন্ট দিন। 🤝✨</p>
+        <a href="discount-calculator.html" style="
+            display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+            padding:10px 24px;border-radius:99px;text-decoration:none;
+            background:linear-gradient(135deg,rgba(58,240,255,.15),rgba(168,85,247,.15));
+            border:1px solid rgba(58,240,255,.35);color:#3af0ff;
+            font-size:.88rem;font-weight:700;letter-spacing:.04em;
+            transition:transform .2s,box-shadow .2s;
+        " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(58,240,255,.25)'"
+            onmouseout="this.style.transform='';this.style.boxShadow=''">
+            🧮 ডিসকাউন্ট ক্যালকুলেটর খুলুন ↗
+        </a>
     </header>
 
     <div class="layout">
@@ -814,6 +1108,16 @@
             </datalist>
             <button class="btn-primary" onclick="generateMemo()">📝 মেমো তৈরি করুন</button>
             <button class="btn-secondary" onclick="window.print()">🖨️ মেমো প্রিন্ট করুন</button>
+
+            <!-- Admin Fund Tracker -->
+            <div class="fund-section">
+                <div class="fund-title">💰 অ্যাডমিন ফান্ড ট্র্যাকার</div>
+                <div class="fund-total-bar">
+                    <span class="fund-total-label">📊 মোট ফান্ড</span>
+                    <span class="fund-total-val" id="fundTotal">0 TK</span>
+                </div>
+                <div id="fundList"></div>
+            </div>
         </section>
 
         <!-- Memo -->
@@ -833,13 +1137,15 @@
 
         const admins = [
             { name: "MD MEHEDI HASAN", icon: "👑", color: "#3af0ff", glow: "rgba(58,240,255,0.18)" },
-            { name: "MD KHAIRUL ISLAM", icon: "🔥", color: "#ff79d1", glow: "rgba(255,121,209,0.18)" },
-            { name: "MD MMH TAMIM", icon: "⚡", color: "#8fff6a", glow: "rgba(143,255,106,0.18)" },
-            { name: "WALID BIN ALI", icon: "💎", color: "#ffd56e", glow: "rgba(255,213,110,0.18)" },
-            { name: "MD RIPON SARKAR", icon: "🚀", color: "#a78bff", glow: "rgba(167,139,255,0.18)" },
-            { name: "MD NUR ALOM SIDDIK", icon: "🌟", color: "#ff8c66", glow: "rgba(255,140,102,0.18)" },
-            { name: "SHAHRIAR HOSSAIN TABASSUM", icon: "🎯", color: "#71f8d8", glow: "rgba(113,248,216,0.18)" },
-            { name: "MD RAJU AHMED JOY", icon: "🏆", color: "#d276ff", glow: "rgba(210,118,255,0.18)" }
+            // ✏️ টাকার পরিমাণ এখানে পরিবর্তন করুন ↓
+            { name: "MD MEHEDI HASAN", icon: "👑", color: "#3af0ff", glow: "rgba(58,240,255,0.18)", tk: 1000 },
+            { name: "MD KHAIRUL ISLAM", icon: "🔥", color: "#ff79d1", glow: "rgba(255,121,209,0.18)", tk: 1000 },
+            { name: "MD MMH TAMIM", icon: "⚡", color: "#8fff6a", glow: "rgba(143,255,106,0.18)", tk: 1000 },
+            { name: "WALID BIN ALI", icon: "💎", color: "#ffd56e", glow: "rgba(255,213,110,0.18)", tk: 1000 },
+            { name: "MD RIPON SARKAR", icon: "🚀", color: "#a78bff", glow: "rgba(167,139,255,0.18)", tk: 1000 },
+            { name: "MD NUR ALOM SIDDIK", icon: "🌟", color: "#ff8c66", glow: "rgba(255,140,102,0.18)", tk: 1000 },
+            { name: "SHAHRIAR HOSSAIN TABASSUM", icon: "🎯", color: "#71f8d8", glow: "rgba(113,248,216,0.18)", tk: 1000 },
+            { name: "MD RAJU AHMED JOY", icon: "🏆", color: "#d276ff", glow: "rgba(210,118,255,0.18)", tk: 1000 }
         ];
 
         let displayName = 'Guest';
@@ -976,11 +1282,14 @@
             box.style.borderColor = admin.color;
             box.style.setProperty('--glow-color', admin.glow);
             box.style.boxShadow = `0 0 20px ${admin.glow}, 0 4px 20px rgba(0,0,0,0.3)`;
+            const tkColor = admin.tk > 1000 ? '#4ade80' : admin.tk < 1000 ? '#f87171' : admin.color;
             box.innerHTML = `
                 <div class="box-icon">${admin.icon}</div>
                 <h3 style="color:${admin.color}">${admin.name}</h3>
                 <p>Admin Panel Member</p>
-                <span class="badge" style="color:${admin.color};border-color:${admin.color}40">💵 1000 TK</span>
+                <span class="badge" style="color:${tkColor};border-color:${tkColor}40;font-size:.82rem">
+                    💵 ${admin.tk.toLocaleString()} TK
+                </span>
             `;
             adminGrid.appendChild(box);
         });
@@ -1021,6 +1330,27 @@
             </div>`;
         }
 
+        function showProcessing(onDone) {
+            const steps = ['📖 বইয়ের তথ্য যাচাই করছি...', '🔢 হিসাব করছি...', '💹 লাভ-ক্ষতি বিশ্লেষণ...', '✅ মেমো তৈরি সম্পন্ন!'];
+            const overlay = document.createElement('div');
+            overlay.id = 'processingOverlay';
+            overlay.innerHTML = `
+                <div class="proc-box">
+                    <span class="proc-calc-icon">🧮</span>
+                    <div class="proc-title">হিসাব চলছে...</div>
+                    <div class="proc-bar-wrap"><div class="proc-bar"></div></div>
+                    <div class="proc-steps" id="procStep">${steps[0]}</div>
+                </div>`;
+            document.body.appendChild(overlay);
+            let i = 0;
+            const iv = setInterval(() => {
+                i++;
+                const el = document.getElementById('procStep');
+                if (el && steps[i]) el.textContent = steps[i];
+                if (i >= steps.length - 1) { clearInterval(iv); setTimeout(() => { overlay.remove(); onDone(); }, 320); }
+            }, 300);
+        }
+
         function generateMemo() {
             const bookName = document.getElementById('bookName').value.trim() || 'N/A';
             const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value)) || 0;
@@ -1034,41 +1364,89 @@
                 return;
             }
 
-            const discountAmount = +(mainPrice * discount / 100).toFixed(2);
-            const priceAfterDiscount = +(mainPrice - discountAmount).toFixed(2);
-            const totalCost = +(priceAfterDiscount + otherCost).toFixed(2);
-            const profit = +(priceAfterDiscount - buyPrice).toFixed(2);
-            const profitClass = profit >= 0 ? 'memo-profit-positive' : 'memo-profit-negative';
-            const profitLabel = profit >= 0 ? '📈 লাভ' : '📉 ক্ষতি';
+            showProcessing(() => {
+                const discountAmount = +(mainPrice * discount / 100).toFixed(2);
+                const priceAfterDiscount = +(mainPrice - discountAmount).toFixed(2);
+                const totalCost = +(priceAfterDiscount + otherCost).toFixed(2);
+                const profit = +(priceAfterDiscount - buyPrice).toFixed(2);
+                const profitClass = profit >= 0 ? 'memo-profit-positive' : 'memo-profit-negative';
+                const profitLabel = profit >= 0 ? '📈 লাভ' : '📉 ক্ষতি';
 
-            const out = document.getElementById('memoOutput');
-            out.classList.remove('empty');
-            out.innerHTML = `
-                <div class="memo-header-bar">
-                    <strong>📋 বই প্লাস ক্যাশ মেমো</strong>
-                    <span>${new Date().toLocaleString('bn-BD')}</span>
-                </div>
-                ${line('🔐 অ্যাডমিন লগইন', displayName)}
-                ${line('✍️ প্রস্তুতকারক', adderName)}
-                ${line('📖 বইয়ের নাম', bookName)}
-                <hr class="memo-divider">
-                ${line('🏷️ গায়ের মূল্য (MRP)', mainPrice.toFixed(2) + ' TK')}
-                ${line('💰 ক্রয় মূল্য', buyPrice.toFixed(2) + ' TK')}
-                ${line('🔖 ডিসকাউন্ট %', discount.toFixed(2) + ' %')}
-                ${line('💸 ডিসকাউন্ট পরিমাণ', discountAmount.toFixed(2) + ' TK')}
-                ${line('✅ ডিসকাউন্ট পরবর্তী মূল্য', priceAfterDiscount.toFixed(2) + ' TK')}
-                ${line('🚚 অন্যান্য খরচ', otherCost.toFixed(2) + ' TK')}
-                <hr class="memo-divider">
-                <div class="memo-total">
-                    <span class="memo-key">💵 মোট প্রদেয় টাকা</span>
-                    <span class="memo-value">${totalCost.toFixed(2)} TK</span>
-                </div>
-                ${line(profitLabel, Math.abs(profit).toFixed(2) + ' TK', profitClass)}
-                <div class="memo-line" style="margin-top:16px;justify-content:center;color:rgba(156,201,255,0.5);font-size:0.78rem;">
-                    🛠️ Design by MMHT 📊 | Print করতে উপরের বাটন ব্যবহার করুন
-                </div>
-            `;
+                const out = document.getElementById('memoOutput');
+                out.classList.remove('empty');
+                out.innerHTML = `
+                    <div class="memo-header-bar">
+                        <strong>📋 বই প্লাস ক্যাশ মেমো</strong>
+                        <span>${new Date().toLocaleString('bn-BD')}</span>
+                    </div>
+                    ${line('🔐 অ্যাডমিন লগইন', displayName)}
+                    ${line('✍️ প্রস্তুতকারক', adderName)}
+                    ${line('📖 বইয়ের নাম', bookName)}
+                    <hr class="memo-divider">
+                    ${line('🏷️ গায়ের মূল্য (MRP)', mainPrice.toFixed(2) + ' TK')}
+                    ${line('💰 ক্রয় মূল্য', buyPrice.toFixed(2) + ' TK')}
+                    ${line('🔖 ডিসকাউন্ট %', discount.toFixed(2) + ' %')}
+                    ${line('💸 ডিসকাউন্ট পরিমাণ', discountAmount.toFixed(2) + ' TK')}
+                    ${line('✅ ডিসকাউন্ট পরবর্তী মূল্য', priceAfterDiscount.toFixed(2) + ' TK')}
+                    ${line('🚚 অন্যান্য খরচ', otherCost.toFixed(2) + ' TK')}
+                    <hr class="memo-divider">
+                    <div class="memo-total">
+                        <span class="memo-key">💵 মোট প্রদেয় টাকা</span>
+                        <span class="memo-value">${totalCost.toFixed(2)} TK</span>
+                    </div>
+                    ${line(profitLabel, Math.abs(profit).toFixed(2) + ' TK', profitClass)}
+                    <div class="memo-line" style="margin-top:16px;justify-content:center;color:rgba(156,201,255,0.5);font-size:0.78rem;">
+                        🛠️ Design by MMHT 📊 | Print করতে উপরের বাটন ব্যবহার করুন
+                    </div>`;
+                out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         }
+
+        // ===== ADMIN FUND TRACKER =====
+        const fundData = admins.map(a => ({ name: a.name, icon: a.icon, color: a.color, amount: 1000 }));
+
+        function updateFundTotal() {
+            const total = fundData.reduce((s, a) => s + a.amount, 0);
+            document.getElementById('fundTotal').textContent = total.toLocaleString() + ' TK';
+        }
+
+        function buildFundTracker() {
+            const list = document.getElementById('fundList');
+            list.innerHTML = '';
+            fundData.forEach((a, i) => {
+                const row = document.createElement('div');
+                row.className = 'fund-row';
+                row.innerHTML = `
+                    <span class="fund-icon">${a.icon}</span>
+                    <span class="fund-name" style="color:${a.color}">${a.name}</span>
+                    <div class="fund-amount-wrap">
+                        <button class="fund-btn" data-i="${i}" data-d="-100">−</button>
+                        <input class="fund-input" type="number" data-i="${i}" value="${a.amount}" min="0" step="100">
+                        <button class="fund-btn" data-i="${i}" data-d="100">+</button>
+                        <span class="fund-tk">TK</span>
+                    </div>`;
+                list.appendChild(row);
+            });
+
+            list.querySelectorAll('.fund-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = +btn.dataset.i, d = +btn.dataset.d;
+                    fundData[i].amount = Math.max(0, fundData[i].amount + d);
+                    list.querySelector(`input[data-i="${i}"]`).value = fundData[i].amount;
+                    updateFundTotal();
+                });
+            });
+            list.querySelectorAll('.fund-input').forEach(inp => {
+                inp.addEventListener('input', () => {
+                    const i = +inp.dataset.i;
+                    fundData[i].amount = Math.max(0, parseInt(inp.value) || 0);
+                    updateFundTotal();
+                });
+            });
+            updateFundTotal();
+        }
+
+        buildFundTracker();
     </script>
 </body>
 
