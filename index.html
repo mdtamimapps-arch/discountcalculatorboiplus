@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Boi Plus Admin Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Orbitron:wght@700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #070b17;
@@ -14,14 +17,18 @@
             --border: rgba(58, 240, 255, 0.20);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             min-height: 100vh;
             background: #070b17;
             background-image:
-                radial-gradient(ellipse at top left, rgba(30,63,109,0.7) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(80,20,120,0.5) 0%, transparent 50%);
+                radial-gradient(ellipse at top left, rgba(30, 63, 109, 0.7) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(80, 20, 120, 0.5) 0%, transparent 50%);
             color: var(--text);
             font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
             overflow-x: hidden;
@@ -33,10 +40,10 @@
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(1px 1px at 20% 30%, rgba(58,240,255,0.4), transparent),
-                radial-gradient(1px 1px at 80% 10%, rgba(255,120,220,0.4), transparent),
-                radial-gradient(1px 1px at 60% 80%, rgba(100,200,255,0.3), transparent),
-                radial-gradient(1px 1px at 10% 90%, rgba(130,100,255,0.4), transparent);
+                radial-gradient(1px 1px at 20% 30%, rgba(58, 240, 255, 0.4), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(255, 120, 220, 0.4), transparent),
+                radial-gradient(1px 1px at 60% 80%, rgba(100, 200, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 10% 90%, rgba(130, 100, 255, 0.4), transparent);
             pointer-events: none;
             z-index: 0;
         }
@@ -52,8 +59,8 @@
             display: inline-block;
             padding: 6px 20px;
             border-radius: 999px;
-            background: rgba(58,240,255,0.1);
-            border: 1px solid rgba(58,240,255,0.3);
+            background: rgba(58, 240, 255, 0.1);
+            border: 1px solid rgba(58, 240, 255, 0.3);
             color: var(--accent);
             font-size: 0.8rem;
             letter-spacing: 0.15em;
@@ -90,11 +97,13 @@
             z-index: 1;
         }
 
-        .panel, .calculator, .memo {
+        .panel,
+        .calculator,
+        .memo {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
             padding: 28px;
             backdrop-filter: blur(20px);
         }
@@ -144,7 +153,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at top left, var(--glow-color, rgba(58,240,255,0.15)), transparent 60%);
+            background: radial-gradient(circle at top left, var(--glow-color, rgba(58, 240, 255, 0.15)), transparent 60%);
             pointer-events: none;
         }
 
@@ -173,8 +182,8 @@
             border-radius: 999px;
             font-size: 0.75rem;
             font-weight: 700;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         /* RGB animated border on hover */
@@ -183,13 +192,15 @@
             position: absolute;
             inset: -1px;
             border-radius: 18px;
-            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.06));
+            background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.06));
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s;
         }
 
-        .box:hover::after { opacity: 1; }
+        .box:hover::after {
+            opacity: 1;
+        }
 
         /* Calculator */
         .calculator input,
@@ -199,8 +210,8 @@
             padding: 13px 16px;
             font-size: 0.9rem;
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text);
             font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
             transition: border-color 0.2s, box-shadow 0.2s;
@@ -208,11 +219,13 @@
 
         .calculator input:focus {
             outline: none;
-            border-color: rgba(58,240,255,0.5);
-            box-shadow: 0 0 0 3px rgba(58,240,255,0.1);
+            border-color: rgba(58, 240, 255, 0.5);
+            box-shadow: 0 0 0 3px rgba(58, 240, 255, 0.1);
         }
 
-        .calculator input::placeholder { color: rgba(156,201,255,0.5); }
+        .calculator input::placeholder {
+            color: rgba(156, 201, 255, 0.5);
+        }
 
         .btn-primary {
             width: 100%;
@@ -235,22 +248,31 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
             opacity: 0;
             transition: opacity 0.2s;
         }
 
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(58,240,255,0.3); }
-        .btn-primary:hover::before { opacity: 1; }
-        .btn-primary:active { transform: translateY(0); }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(58, 240, 255, 0.3);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
 
         .btn-secondary {
             width: 100%;
             padding: 13px;
             font-size: 0.92rem;
             border-radius: 14px;
-            border: 1px solid rgba(58,240,255,0.3);
-            background: rgba(58,240,255,0.06);
+            border: 1px solid rgba(58, 240, 255, 0.3);
+            background: rgba(58, 240, 255, 0.06);
             color: var(--accent);
             font-weight: 700;
             cursor: pointer;
@@ -258,15 +280,18 @@
             font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
         }
 
-        .btn-secondary:hover { background: rgba(58,240,255,0.12); border-color: rgba(58,240,255,0.5); }
+        .btn-secondary:hover {
+            background: rgba(58, 240, 255, 0.12);
+            border-color: rgba(58, 240, 255, 0.5);
+        }
 
         .hint {
             color: var(--muted);
             font-size: 0.82rem;
             margin-bottom: 14px;
             padding: 8px 12px;
-            background: rgba(58,240,255,0.05);
-            border-left: 3px solid rgba(58,240,255,0.4);
+            background: rgba(58, 240, 255, 0.05);
+            border-left: 3px solid rgba(58, 240, 255, 0.4);
             border-radius: 0 8px 8px 0;
         }
 
@@ -274,8 +299,8 @@
         .memo-header-bar {
             padding: 14px 18px;
             border-radius: 14px;
-            background: linear-gradient(90deg, rgba(58,240,255,0.15), rgba(168,85,247,0.15));
-            border: 1px solid rgba(58,240,255,0.2);
+            background: linear-gradient(90deg, rgba(58, 240, 255, 0.15), rgba(168, 85, 247, 0.15));
+            border: 1px solid rgba(58, 240, 255, 0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -284,8 +309,15 @@
             gap: 8px;
         }
 
-        .memo-header-bar strong { color: #fff; font-size: 0.95rem; }
-        .memo-header-bar span { color: #7eb8ff; font-size: 0.82rem; }
+        .memo-header-bar strong {
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .memo-header-bar span {
+            color: #7eb8ff;
+            font-size: 0.82rem;
+        }
 
         .memo-output {
             padding: 20px;
@@ -296,7 +328,7 @@
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 0.88rem;
             line-height: 1.8;
-            border: 1px solid rgba(58,240,255,0.08);
+            border: 1px solid rgba(58, 240, 255, 0.08);
         }
 
         .memo-output.empty {
@@ -304,7 +336,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: rgba(156,201,255,0.5);
+            color: rgba(156, 201, 255, 0.5);
             font-family: 'Noto Sans Bengali', sans-serif;
         }
 
@@ -313,16 +345,27 @@
             justify-content: space-between;
             align-items: center;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .memo-line:last-child { border-bottom: none; }
-        .memo-key { color: #7eb8ff; font-size: 0.85rem; }
-        .memo-value { color: #fff; font-weight: 700; font-size: 0.88rem; }
+        .memo-line:last-child {
+            border-bottom: none;
+        }
+
+        .memo-key {
+            color: #7eb8ff;
+            font-size: 0.85rem;
+        }
+
+        .memo-value {
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
 
         .memo-divider {
             border: none;
-            border-top: 1px dashed rgba(58,240,255,0.2);
+            border-top: 1px dashed rgba(58, 240, 255, 0.2);
             margin: 12px 0;
         }
 
@@ -331,15 +374,27 @@
             justify-content: space-between;
             padding: 10px 14px;
             border-radius: 10px;
-            background: linear-gradient(90deg, rgba(58,240,255,0.12), rgba(168,85,247,0.12));
+            background: linear-gradient(90deg, rgba(58, 240, 255, 0.12), rgba(168, 85, 247, 0.12));
             margin-top: 8px;
         }
 
-        .memo-total .memo-key { color: #3af0ff; font-weight: 700; }
-        .memo-total .memo-value { color: #3af0ff; font-size: 1rem; }
+        .memo-total .memo-key {
+            color: #3af0ff;
+            font-weight: 700;
+        }
 
-        .memo-profit-positive { color: #4ade80 !important; }
-        .memo-profit-negative { color: #f87171 !important; }
+        .memo-total .memo-value {
+            color: #3af0ff;
+            font-size: 1rem;
+        }
+
+        .memo-profit-positive {
+            color: #4ade80 !important;
+        }
+
+        .memo-profit-negative {
+            color: #f87171 !important;
+        }
 
         .print-row {
             display: grid;
@@ -348,34 +403,386 @@
             margin-top: 16px;
         }
 
-        .memo-section { grid-column: 1 / -1; }
+        .memo-section {
+            grid-column: 1 / -1;
+        }
 
         @media (max-width: 960px) {
-            .layout { grid-template-columns: 1fr; }
-            .memo-section { grid-column: 1; }
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .memo-section {
+                grid-column: 1;
+            }
         }
 
         @media print {
-            body { background: #fff; color: #000; }
-            .panel, .calculator, .print-row, header p.subtitle, .header-badge { display: none; }
-            .memo { box-shadow: none; border: none; background: #fff; }
-            .memo-output { background: transparent; color: #000; }
-            .memo-key { color: #333; }
-            .memo-value { color: #000; }
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .panel,
+            .calculator,
+            .print-row,
+            header p.subtitle,
+            .header-badge {
+                display: none;
+            }
+
+            .memo {
+                box-shadow: none;
+                border: none;
+                background: #fff;
+            }
+
+            .memo-output {
+                background: transparent;
+                color: #000;
+            }
+
+            .memo-key {
+                color: #333;
+            }
+
+            .memo-value {
+                color: #000;
+            }
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
-        ::-webkit-scrollbar-thumb { background: rgba(58,240,255,0.2); border-radius: 6px; }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(58, 240, 255, 0.2);
+            border-radius: 6px;
+        }
+
+        /* ===== NAME MODAL ===== */
+        @keyframes rgbBorder {
+            0% {
+                border-color: #3af0ff;
+                box-shadow: 0 0 30px rgba(58, 240, 255, 0.5), 0 0 80px rgba(58, 240, 255, 0.15), inset 0 0 30px rgba(58, 240, 255, 0.05);
+            }
+
+            16% {
+                border-color: #a855f7;
+                box-shadow: 0 0 30px rgba(168, 85, 247, 0.5), 0 0 80px rgba(168, 85, 247, 0.15), inset 0 0 30px rgba(168, 85, 247, 0.05);
+            }
+
+            33% {
+                border-color: #ff79d1;
+                box-shadow: 0 0 30px rgba(255, 121, 209, 0.5), 0 0 80px rgba(255, 121, 209, 0.15), inset 0 0 30px rgba(255, 121, 209, 0.05);
+            }
+
+            50% {
+                border-color: #8fff6a;
+                box-shadow: 0 0 30px rgba(143, 255, 106, 0.5), 0 0 80px rgba(143, 255, 106, 0.15), inset 0 0 30px rgba(143, 255, 106, 0.05);
+            }
+
+            66% {
+                border-color: #ffd56e;
+                box-shadow: 0 0 30px rgba(255, 213, 110, 0.5), 0 0 80px rgba(255, 213, 110, 0.15), inset 0 0 30px rgba(255, 213, 110, 0.05);
+            }
+
+            83% {
+                border-color: #ff6b6b;
+                box-shadow: 0 0 30px rgba(255, 107, 107, 0.5), 0 0 80px rgba(255, 107, 107, 0.15), inset 0 0 30px rgba(255, 107, 107, 0.05);
+            }
+
+            100% {
+                border-color: #3af0ff;
+                box-shadow: 0 0 30px rgba(58, 240, 255, 0.5), 0 0 80px rgba(58, 240, 255, 0.15), inset 0 0 30px rgba(58, 240, 255, 0.05);
+            }
+        }
+
+        @keyframes rgbText {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.92);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes backdropIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        #nameModal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: backdropIn 0.4s ease forwards;
+        }
+
+        #nameModal .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(4, 8, 20, 0.88);
+            backdrop-filter: blur(12px);
+        }
+
+        #nameModal .modal-box {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(145deg, rgba(7, 11, 30, 0.97) 0%, rgba(15, 20, 50, 0.97) 100%);
+            border: 2px solid #3af0ff;
+            border-radius: 28px;
+            padding: 44px 40px 36px;
+            width: min(460px, 92vw);
+            animation: floatUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, rgbBorder 4s linear infinite;
+            text-align: center;
+        }
+
+        .modal-emoji-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .modal-emoji {
+            font-size: 3.2rem;
+            display: block;
+            filter: drop-shadow(0 0 16px rgba(58, 240, 255, 0.6));
+            animation: floatUp 0.6s ease both;
+        }
+
+        .modal-emoji-wrap::before,
+        .modal-emoji-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(58, 240, 255, 0.4);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        .modal-emoji-wrap::after {
+            animation-delay: 0.8s;
+        }
+
+        .modal-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            margin-bottom: 6px;
+            background: linear-gradient(90deg, #3af0ff, #a855f7, #ff79d1, #8fff6a, #ffd56e, #3af0ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rgbText 4s ease infinite;
+        }
+
+        .modal-subtitle {
+            color: rgba(156, 201, 255, 0.65);
+            font-size: 0.88rem;
+            margin-bottom: 28px;
+        }
+
+        .name-input-wrap {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        #modalNameInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border-radius: 14px;
+            border: 1.5px solid rgba(58, 240, 255, 0.35);
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+            transition: border-color 0.25s, box-shadow 0.25s;
+            outline: none;
+            text-align: center;
+            letter-spacing: 0.04em;
+        }
+
+        #modalNameInput:focus {
+            border-color: #3af0ff;
+            box-shadow: 0 0 0 4px rgba(58, 240, 255, 0.12);
+        }
+
+        #modalNameInput::placeholder {
+            color: rgba(156, 201, 255, 0.4);
+            letter-spacing: 0;
+        }
+
+        /* Suggestion Dropdown */
+        #nameSuggestions {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: rgba(8, 14, 38, 0.98);
+            border: 1px solid rgba(58, 240, 255, 0.25);
+            border-radius: 14px;
+            overflow: hidden;
+            z-index: 10;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+            display: none;
+        }
+
+        .suggest-item {
+            padding: 11px 18px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            color: #cce8ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.15s, color 0.15s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: left;
+        }
+
+        .suggest-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggest-item:hover,
+        .suggest-item.active {
+            background: rgba(58, 240, 255, 0.1);
+            color: #3af0ff;
+        }
+
+        .suggest-item .suggest-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .suggest-highlight {
+            color: #3af0ff;
+            font-weight: 700;
+        }
+
+        /* Buttons */
+        .modal-btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        #modalConfirmBtn {
+            padding: 13px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #3af0ff 0%, #1a7eff 50%, #a855f7 100%);
+            color: #040c1f;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #modalConfirmBtn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        #modalConfirmBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(58, 240, 255, 0.35);
+        }
+
+        #modalConfirmBtn:hover::before {
+            opacity: 1;
+        }
+
+        #modalConfirmBtn:active {
+            transform: translateY(0);
+        }
+
+        #modalGuestBtn {
+            padding: 13px;
+            border-radius: 12px;
+            border: 1px solid rgba(156, 201, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(156, 201, 255, 0.65);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+            transition: all 0.2s;
+        }
+
+        #modalGuestBtn:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: #cce8ff;
+            border-color: rgba(156, 201, 255, 0.35);
+        }
+
+        .modal-note {
+            margin-top: 14px;
+            font-size: 0.78rem;
+            color: rgba(156, 201, 255, 0.4);
+        }
     </style>
 </head>
+
 <body>
 
     <header>
         <div class="header-badge">⚡ BOI PLUS SECURE ADMIN</div>
         <h1 id="welcomeMsg">মারহাবা! Boi Plus অ্যাডমিন প্যানেলে স্বাগতম।</h1>
-        <p class="subtitle">১০০০ টাকা করে জমা দেওয়া অ্যাডমিন মেম্বারদের তালিকা দেখুন। ডিসকাউন্ট ক্যালকুলেটর দিয়ে মেমো তৈরি করুন এবং প্রিন্ট দিন। 🤝✨</p>
+        <p class="subtitle">১০০০ টাকা করে জমা দেওয়া অ্যাডমিন মেম্বারদের তালিকা দেখুন। ডিসকাউন্ট ক্যালকুলেটর দিয়ে মেমো
+            তৈরি করুন এবং প্রিন্ট দিন। 🤝✨</p>
     </header>
 
     <div class="layout">
@@ -412,7 +819,8 @@
         <!-- Memo -->
         <section class="memo memo-section">
             <div class="section-title">Cash Memo Preview</div>
-            <div id="memoOutput" class="memo-output empty">বইয়ের তথ্য লিখুন এবং "মেমো তৈরি করুন" বাটনে চাপ দিন 📖✨</div>
+            <div id="memoOutput" class="memo-output empty">বইয়ের তথ্য লিখুন এবং "মেমো তৈরি করুন" বাটনে চাপ দিন 📖✨
+            </div>
         </section>
     </div>
 
@@ -424,19 +832,142 @@
         }
 
         const admins = [
-            { name: "MD MEHEDI HASAN",           icon: "👑", color: "#3af0ff", glow: "rgba(58,240,255,0.18)" },
-            { name: "MD KHAIRUL ISLAM",           icon: "🔥", color: "#ff79d1", glow: "rgba(255,121,209,0.18)" },
-            { name: "MD MMH TAMIM",               icon: "⚡", color: "#8fff6a", glow: "rgba(143,255,106,0.18)" },
-            { name: "WALID BIN ALI",              icon: "💎", color: "#ffd56e", glow: "rgba(255,213,110,0.18)" },
-            { name: "MD RIPON SARKAR",            icon: "🚀", color: "#a78bff", glow: "rgba(167,139,255,0.18)" },
-            { name: "MD NUR ALOM SIDDIK",         icon: "🌟", color: "#ff8c66", glow: "rgba(255,140,102,0.18)" },
-            { name: "SHAHRIAR HOSSAIN TABASSUM",  icon: "🎯", color: "#71f8d8", glow: "rgba(113,248,216,0.18)" },
-            { name: "MD RAJU AHMED JOY",          icon: "🏆", color: "#d276ff", glow: "rgba(210,118,255,0.18)" }
+            { name: "MD MEHEDI HASAN", icon: "👑", color: "#3af0ff", glow: "rgba(58,240,255,0.18)" },
+            { name: "MD KHAIRUL ISLAM", icon: "🔥", color: "#ff79d1", glow: "rgba(255,121,209,0.18)" },
+            { name: "MD MMH TAMIM", icon: "⚡", color: "#8fff6a", glow: "rgba(143,255,106,0.18)" },
+            { name: "WALID BIN ALI", icon: "💎", color: "#ffd56e", glow: "rgba(255,213,110,0.18)" },
+            { name: "MD RIPON SARKAR", icon: "🚀", color: "#a78bff", glow: "rgba(167,139,255,0.18)" },
+            { name: "MD NUR ALOM SIDDIK", icon: "🌟", color: "#ff8c66", glow: "rgba(255,140,102,0.18)" },
+            { name: "SHAHRIAR HOSSAIN TABASSUM", icon: "🎯", color: "#71f8d8", glow: "rgba(113,248,216,0.18)" },
+            { name: "MD RAJU AHMED JOY", icon: "🏆", color: "#d276ff", glow: "rgba(210,118,255,0.18)" }
         ];
 
-        const userName = prompt('আপনার নাম কী? (What is your name?)');
-        const displayName = userName ? userName.trim() : 'Guest';
-        document.getElementById('welcomeMsg').textContent = `স্বাগতম, ${displayName}! Boi Plus Admin Panel-এ আপনাকে স্বাগতম 🎉`;
+        let displayName = 'Guest';
+
+        // ===== NAME MODAL LOGIC =====
+        const adminNames = [
+            { name: "MD MEHEDI HASAN", icon: "👑" },
+            { name: "MD KHAIRUL ISLAM", icon: "🔥" },
+            { name: "MD MMH TAMIM", icon: "⚡" },
+            { name: "WALID BIN ALI", icon: "💎" },
+            { name: "MD RIPON SARKAR", icon: "🚀" },
+            { name: "MD NUR ALOM SIDDIK", icon: "🌟" },
+            { name: "SHAHRIAR HOSSAIN TABASSUM", icon: "🎯" },
+            { name: "MD RAJU AHMED JOY", icon: "🏆" }
+        ];
+
+        function createNameModal() {
+            const modal = document.createElement('div');
+            modal.id = 'nameModal';
+            modal.innerHTML = `
+                <div class="modal-backdrop"></div>
+                <div class="modal-box">
+                    <div class="modal-emoji-wrap"><span class="modal-emoji">👤</span></div>
+                    <div class="modal-title">What is your name?</div>
+                    <p class="modal-subtitle">আপনার নাম লিখুন অথবা Guest হিসেবে প্রবেশ করুন</p>
+                    <div class="name-input-wrap">
+                        <input id="modalNameInput" type="text" placeholder="✨ আপনার নাম লিখুন..." autocomplete="off">
+                        <div id="nameSuggestions"></div>
+                    </div>
+                    <div class="modal-btn-row">
+                        <button id="modalConfirmBtn">✅ প্রবেশ করুন</button>
+                        <button id="modalGuestBtn">👻 Guest হিসেবে</button>
+                    </div>
+                    <p class="modal-note">🔒 আপনার নাম শুধু এই সেশনে ব্যবহার হবে</p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            const input = document.getElementById('modalNameInput');
+            const sugBox = document.getElementById('nameSuggestions');
+            let activeIdx = -1;
+
+            function highlightMatch(text, query) {
+                if (!query) return text;
+                const idx = text.toLowerCase().indexOf(query.toLowerCase());
+                if (idx === -1) return text;
+                return text.slice(0, idx)
+                    + '<span class="suggest-highlight">' + text.slice(idx, idx + query.length) + '</span>'
+                    + text.slice(idx + query.length);
+            }
+
+            function showSuggestions(query) {
+                const q = query.trim().toLowerCase();
+                sugBox.innerHTML = '';
+                activeIdx = -1;
+                if (!q) { sugBox.style.display = 'none'; return; }
+
+                // Show all 8 names — prioritize matches, then show rest
+                const matched = adminNames.filter(a => a.name.toLowerCase().includes(q));
+                const others = adminNames.filter(a => !a.name.toLowerCase().includes(q));
+                const list = [...matched, ...others];
+
+                list.forEach((a, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'suggest-item';
+                    item.innerHTML = `<span class="suggest-icon">${a.icon}</span><span>${highlightMatch(a.name, q)}</span>`;
+                    item.addEventListener('mousedown', (e) => {
+                        e.preventDefault();
+                        input.value = a.name;
+                        sugBox.style.display = 'none';
+                    });
+                    sugBox.appendChild(item);
+                });
+                sugBox.style.display = 'block';
+            }
+
+            input.addEventListener('input', () => showSuggestions(input.value));
+            input.addEventListener('focus', () => { if (input.value) showSuggestions(input.value); });
+            input.addEventListener('blur', () => setTimeout(() => { sugBox.style.display = 'none'; }, 150));
+
+            input.addEventListener('keydown', (e) => {
+                const items = sugBox.querySelectorAll('.suggest-item');
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    activeIdx = Math.min(activeIdx + 1, items.length - 1);
+                    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+                    if (items[activeIdx]) input.value = items[activeIdx].textContent.trim();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    activeIdx = Math.max(activeIdx - 1, 0);
+                    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+                    if (items[activeIdx]) input.value = items[activeIdx].textContent.trim();
+                } else if (e.key === 'Enter') {
+                    confirmName();
+                } else if (e.key === 'Escape') {
+                    setGuest();
+                }
+            });
+
+            function confirmName() {
+                const val = input.value.trim();
+                displayName = val || 'Guest';
+                closeModal();
+            }
+
+            function setGuest() {
+                displayName = 'Guest';
+                closeModal();
+            }
+
+            function closeModal() {
+                modal.style.animation = 'backdropIn 0.25s ease reverse forwards';
+                setTimeout(() => {
+                    modal.remove();
+                    document.getElementById('welcomeMsg').textContent =
+                        displayName === 'Guest'
+                            ? `স্বাগতম, Guest! 👻 Boi Plus Admin Panel-এ আপনাকে স্বাগতম 🎉`
+                            : `স্বাগতম, ${displayName}! Boi Plus Admin Panel-এ আপনাকে স্বাগতম 🎉`;
+                }, 250);
+            }
+
+            document.getElementById('modalConfirmBtn').addEventListener('click', confirmName);
+            document.getElementById('modalGuestBtn').addEventListener('click', setGuest);
+
+            setTimeout(() => input.focus(), 400);
+        }
+
+        createNameModal();
 
         const adminGrid = document.getElementById('adminGrid');
         admins.forEach(admin => {
@@ -455,8 +986,8 @@
         });
 
         const mainPriceInput = document.getElementById('mainPrice');
-        const buyPriceInput  = document.getElementById('buyPrice');
-        const discountInput  = document.getElementById('discount');
+        const buyPriceInput = document.getElementById('buyPrice');
+        const discountInput = document.getElementById('discount');
 
         function calcDiscountFromPrices() {
             const m = parseFloat(convertToEnglishDigits(mainPriceInput.value));
@@ -491,10 +1022,10 @@
         }
 
         function generateMemo() {
-            const bookName  = document.getElementById('bookName').value.trim() || 'N/A';
+            const bookName = document.getElementById('bookName').value.trim() || 'N/A';
             const mainPrice = parseFloat(convertToEnglishDigits(mainPriceInput.value)) || 0;
-            const buyPrice  = parseFloat(convertToEnglishDigits(buyPriceInput.value))  || 0;
-            const discount  = parseFloat(convertToEnglishDigits(discountInput.value))  || 0;
+            const buyPrice = parseFloat(convertToEnglishDigits(buyPriceInput.value)) || 0;
+            const discount = parseFloat(convertToEnglishDigits(discountInput.value)) || 0;
             const otherCost = parseFloat(convertToEnglishDigits(document.getElementById('otherCost').value)) || 0;
             const adderName = document.getElementById('adderName').value.trim() || 'Anonymous';
 
@@ -503,12 +1034,12 @@
                 return;
             }
 
-            const discountAmount    = +(mainPrice * discount / 100).toFixed(2);
+            const discountAmount = +(mainPrice * discount / 100).toFixed(2);
             const priceAfterDiscount = +(mainPrice - discountAmount).toFixed(2);
-            const totalCost         = +(priceAfterDiscount + otherCost).toFixed(2);
-            const profit            = +(priceAfterDiscount - buyPrice).toFixed(2);
-            const profitClass       = profit >= 0 ? 'memo-profit-positive' : 'memo-profit-negative';
-            const profitLabel       = profit >= 0 ? '📈 লাভ' : '📉 ক্ষতি';
+            const totalCost = +(priceAfterDiscount + otherCost).toFixed(2);
+            const profit = +(priceAfterDiscount - buyPrice).toFixed(2);
+            const profitClass = profit >= 0 ? 'memo-profit-positive' : 'memo-profit-negative';
+            const profitLabel = profit >= 0 ? '📈 লাভ' : '📉 ক্ষতি';
 
             const out = document.getElementById('memoOutput');
             out.classList.remove('empty');
@@ -540,4 +1071,5 @@
         }
     </script>
 </body>
+
 </html>
