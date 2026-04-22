@@ -542,16 +542,6 @@
       .cards-grid {
         grid-template-columns: 1fr;
       }
-
-      .table-view {
-        display: none !important;
-      }
-    }
-
-    @media (min-width: 701px) {
-      .card-view {
-        display: none !important;
-      }
     }
 
     .footer {
@@ -805,7 +795,7 @@
       const btnCard = document.getElementById('vbtnCard');
       const btnTable = document.getElementById('vbtnTable');
       if (v === 'card') {
-        cardEl.style.display = '';
+        cardEl.style.display = 'grid';
         tableEl.style.display = 'none';
         btnCard.classList.add('active');
         btnTable.classList.remove('active');
@@ -825,6 +815,13 @@
     renderSummary();
     renderCards('all');
     renderTable('all');
+
+    // Default view based on screen size
+    if (window.innerWidth > 700) {
+      setView('table');
+    } else {
+      setView('card');
+    }
 
     // Animate bars after paint
     setTimeout(() => {
