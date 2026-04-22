@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boi Plus - ইনভেন্টরি ও বিক্রয় হিসাব</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f1a;
+      --card: #161929;
+      --card2: #1e2236;
+      --border: #2a2f4a;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --green: #00e5a0;
+      --red: #ff4d6d;
+      --yellow: #ffd166;
+      --text: #e8eaf6;
+      --muted: #8b93c4;
+      --gold: #f4c542;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #1a1040 0%, #0d0f1a 60%, #0f1f3d 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 24px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(108, 99, 255, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    /* SUMMARY CARDS */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+      max-width: 1100px;
+      margin: 28px auto 0;
+      padding: 0 18px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 16px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(108, 99, 255, 0.15);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .stat-card.blue::before {
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+    }
+
+    .stat-card.green::before {
+      background: linear-gradient(90deg, var(--green), #06d6a0);
+    }
+
+    .stat-card.red::before {
+      background: linear-gradient(90deg, var(--red), #ff758c);
+    }
+
+    .stat-card.yellow::before {
+      background: linear-gradient(90deg, var(--yellow), #f9a825);
+    }
+
+    .stat-card.gold::before {
+      background: linear-gradient(90deg, var(--gold), #f4a642);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .stat-val {
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
+
+    .stat-val.blue {
+      color: #a78bfa;
+    }
+
+    .stat-val.green {
+      color: var(--green);
+    }
+
+    .stat-val.red {
+      color: var(--red);
+    }
+
+    .stat-val.yellow {
+      color: var(--yellow);
+    }
+
+    .stat-val.gold {
+      color: var(--gold);
+    }
+
+    .stat-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      padding: 0 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 30px;
+      padding: 7px 18px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(108, 99, 255, 0.3);
+    }
+
+    /* TABLE SECTION */
+    .section {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      padding: 0 18px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    /* BOOK CARDS (mobile) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 16px;
+    }
+
+    .book-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(108, 99, 255, 0.14);
+    }
+
+    .book-card.profit {
+      border-left: 3px solid var(--green);
+    }
+
+    .book-card.loss {
+      border-left: 3px solid var(--red);
+    }
+
+    .book-card.unsold {
+      border-left: 3px solid var(--yellow);
+    }
+
+    .book-card.nodata {
+      border-left: 3px solid var(--muted);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .book-num {
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .book-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .badge {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .badge.profit {
+      background: rgba(0, 229, 160, 0.12);
+      color: var(--green);
+    }
+
+    .badge.loss {
+      background: rgba(255, 77, 109, 0.12);
+      color: var(--red);
+    }
+
+    .badge.unsold {
+      background: rgba(255, 209, 102, 0.12);
+      color: var(--yellow);
+    }
+
+    .badge.nodata {
+      background: rgba(139, 147, 196, 0.1);
+      color: var(--muted);
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.87rem;
+    }
+
+    .card-row:last-child {
+      border-bottom: none;
+    }
+
+    .card-row .lbl {
+      color: var(--muted);
+    }
+
+    .card-row .val {
+      font-weight: 600;
+    }
+
+    .val.g {
+      color: var(--green);
+    }
+
+    .val.r {
+      color: var(--red);
+    }
+
+    .val.y {
+      color: var(--yellow);
+    }
+
+    .val.m {
+      color: var(--muted);
+    }
+
+    .profit-bar-wrap {
+      margin-top: 12px;
+    }
+
+    .profit-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .profit-bar-bg {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .profit-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 1s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .profit-bar-fill.green {
+      background: linear-gradient(90deg, var(--green), #06d6a0);
+    }
+
+    .profit-bar-fill.red {
+      background: linear-gradient(90deg, var(--red), #ff758c);
+    }
+
+    /* DESKTOP TABLE */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    thead tr {
+      background: var(--card2);
+    }
+
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover {
+      background: var(--card2);
+    }
+
+    tbody td {
+      padding: 12px 16px;
+      vertical-align: middle;
+    }
+
+    .td-num {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .td-name {
+      font-weight: 600;
+    }
+
+    .td-g {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .td-r {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .td-y {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    .td-m {
+      color: var(--muted);
+    }
+
+    .profit-pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .pill-g {
+      background: rgba(0, 229, 160, 0.12);
+      color: var(--green);
+    }
+
+    .pill-r {
+      background: rgba(255, 77, 109, 0.12);
+      color: var(--red);
+    }
+
+    .pill-y {
+      background: rgba(255, 209, 102, 0.12);
+      color: var(--yellow);
+    }
+
+    .pill-m {
+      background: rgba(139, 147, 196, 0.1);
+      color: var(--muted);
+    }
+
+    /* VIEW TOGGLE */
+    .view-toggle {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .vbtn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .vbtn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .table-view {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 701px) {
+      .card-view {
+        display: none !important;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 40px;
+      padding: 0 18px;
+    }
+
+    .glow-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.4
+      }
+    }
+
+    .note-tag {
+      display: inline-block;
+      background: rgba(255, 209, 102, 0.1);
+      color: var(--yellow);
+      border-radius: 6px;
+      font-size: 0.72rem;
+      padding: 1px 7px;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo-row">
+      <div class="logo-icon">📚</div>
+      <h1>Boi Plus</h1>
+    </div>
+    <div class="subtitle">ইনভেন্টরি ও বিক্রয় হিসাব — সাপ্তাহিক রিপোর্ট</div>
+  </header>
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <!-- FILTER + VIEW TOGGLE -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('all', this)">সব বই</button>
+    <button class="filter-btn" onclick="setFilter('profit', this)">✅ লাভ</button>
+    <button class="filter-btn" onclick="setFilter('loss', this)">❌ ক্ষতি</button>
+    <button class="filter-btn" onclick="setFilter('unsold', this)">⏳ অবিক্রীত</button>
+    <button class="filter-btn" onclick="setFilter('nodata', this)">❓ অসম্পূর্ণ</button>
+    <div class="view-toggle" id="viewToggle">
+      <button class="vbtn active" id="vbtnCard" onclick="setView('card')" title="কার্ড ভিউ">⊞</button>
+      <button class="vbtn" id="vbtnTable" onclick="setView('table')" title="টেবিল ভিউ">☰</button>
+    </div>
+  </div>
+
+  <!-- CARD VIEW -->
+  <div class="section">
+    <div class="section-title">
+      📖 বইয়ের বিস্তারিত হিসাব
+      <span id="countLabel">৮টি বই</span>
+    </div>
+    <div class="cards-grid card-view" id="cardsGrid"></div>
+    <div class="table-wrap table-view" id="tableWrap" style="display:none">
+      <table>
+        <thead>
+          <tr>
+            <th>বই নং</th>
+            <th>বইয়ের নাম</th>
+            <th>MRP</th>
+            <th>কেনা মূল্য</th>
+            <th>বিক্রি মূল্য</th>
+            <th>লাভ/ক্ষতি</th>
+            <th>মার্জিন</th>
+            <th>অবস্থা</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="glow-dot"></span>
+    Boi Plus Inventory &nbsp;|&nbsp; সর্বশেষ আপডেট: <span id="lastUpdate"></span>
+  </div>
+
+  <script>
+    const books = [
+      { num: '০১', name: 'সাপ্লিমেন্ট বই', mrp: 350, buy: 290, sell: 400 },
+      { num: '০২', name: 'হান্টিং এডেলিন সিরিজ (২ বই)', mrp: 750, buy: 370, sell: 640 },
+      { num: '০৩', name: 'কাঠগোলাপ', mrp: 266, buy: 100, sell: 210 },
+      { num: '০৪', name: 'ক্লাস ৮ আদিল ফুল সেট গাইড', mrp: null, buy: 2300, sell: 2400, buyNote: '১৫% ডিসকাউন্টে' },
+      { num: '০৫', name: 'কোহিনূর ২', mrp: 800, buy: 480, sell: 600 },
+      { num: '০৬', name: 'কোহিনূর ১', mrp: 280, buy: null, sell: null, sellNote: 'বিক্রি হয়নি' },
+      { num: '০৭', name: 'পথের পাঁচালী', mrp: 330, buy: null, sell: 280 },
+      { num: '০৮', name: 'এডেলিন', mrp: 650, buy: null, sell: null, sellNote: 'বিক্রি হয়নি' },
+    ];
+
+    function tk(n) { return n != null ? '৳' + n.toLocaleString('bn-BD') : null; }
+    function pct(profit, buy) { return buy ? ((profit / buy) * 100).toFixed(1) : null; }
+
+    function getStatus(b) {
+      if (b.sell === null) return 'unsold';
+      if (b.buy === null) return 'nodata';
+      return b.sell >= b.buy ? 'profit' : 'loss';
+    }
+
+    function getProfit(b) {
+      if (b.buy == null || b.sell == null) return null;
+      return b.sell - b.buy;
+    }
+
+    function statusLabel(s) {
+      if (s === 'profit') return 'লাভ ✅';
+      if (s === 'loss') return 'ক্ষতি ❌';
+      if (s === 'unsold') return 'অবিক্রীত ⏳';
+      return 'অসম্পূর্ণ ❓';
+    }
+
+    // Summary
+    function renderSummary() {
+      const sold = books.filter(b => b.sell !== null && b.buy !== null);
+      const totalBuy = sold.reduce((a, b) => a + b.buy, 0);
+      const totalSell = sold.reduce((a, b) => a + b.sell, 0);
+      const totalProfit = totalSell - totalBuy;
+      const profitBooks = books.filter(b => getStatus(b) === 'profit').length;
+      const lossBooks = books.filter(b => getStatus(b) === 'loss').length;
+      const unsoldBooks = books.filter(b => getStatus(b) === 'unsold').length;
+
+      const stats = [
+        { label: 'মোট বিনিয়োগ', val: '৳' + totalBuy.toLocaleString('bn-BD'), cls: 'blue', sub: sold.length + 'টি বইয়ের তথ্য' },
+        { label: 'মোট বিক্রয়', val: '৳' + totalSell.toLocaleString('bn-BD'), cls: 'blue', sub: 'বিক্রীত বইসমূহ' },
+        { label: 'মোট লাভ', val: (totalProfit >= 0 ? '+' : '') + '৳' + totalProfit.toLocaleString('bn-BD'), cls: totalProfit >= 0 ? 'green' : 'red', sub: pct(totalProfit, totalBuy) + '% মার্জিন' },
+        { label: 'লাভজনক বই', val: profitBooks + 'টি', cls: 'green', sub: 'মোট ' + books.length + 'টির মধ্যে' },
+        { label: 'ক্ষতির বই', val: lossBooks + 'টি', cls: 'red', sub: 'বিক্রয় < ক্রয় মূল্য' },
+        { label: 'অবিক্রীত বই', val: unsoldBooks + 'টি', cls: 'yellow', sub: 'এখনো বিক্রি হয়নি' },
+      ];
+      document.getElementById('summaryGrid').innerHTML = stats.map(s => `
+    <div class="stat-card ${s.cls}">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-val ${s.cls}">${s.val}</div>
+      <div class="stat-sub">${s.sub}</div>
+    </div>`).join('');
+    }
+
+    // Cards
+    let currentFilter = 'all';
+    let currentView = 'card';
+
+    function renderCards(filter) {
+      const grid = document.getElementById('cardsGrid');
+      const filtered = filter === 'all' ? books : books.filter(b => getStatus(b) === filter);
+      document.getElementById('countLabel').textContent = filtered.length + 'টি বই';
+
+      grid.innerHTML = filtered.map(b => {
+        const status = getStatus(b);
+        const profit = getProfit(b);
+        const margin = profit != null && b.buy ? pct(profit, b.buy) : null;
+        const maxMargin = 60;
+        const barW = margin ? Math.min(Math.abs(parseFloat(margin)), maxMargin) / maxMargin * 100 : 0;
+        const barCls = profit >= 0 ? 'green' : 'red';
+
+        return `<div class="book-card ${status}">
+      <div class="card-header">
+        <span class="book-num">#${b.num}</span>
+        <span class="book-name">${b.name}</span>
+        <span class="badge ${status}">${statusLabel(status)}</span>
+      </div>
+      <div class="card-row">
+        <span class="lbl">প্রকৃত মূল্য (MRP)</span>
+        <span class="val">${b.mrp ? '৳' + b.mrp.toLocaleString('bn-BD') : '<span class="m">জানা নাই</span>'}</span>
+      </div>
+      <div class="card-row">
+        <span class="lbl">কেনা মূল্য</span>
+        <span class="val">${b.buy ? '৳' + b.buy.toLocaleString('bn-BD') + (b.buyNote ? `<span class="note-tag">${b.buyNote}</span>` : '') : '<span class="m">তথ্য নেই</span>'}</span>
+      </div>
+      <div class="card-row">
+        <span class="lbl">বিক্রি মূল্য</span>
+        <span class="val">${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="y">${b.sellNote || 'তথ্য নেই'}</span>`}</span>
+      </div>
+      <div class="card-row">
+        <span class="lbl">লাভ / ক্ষতি</span>
+        <span class="val ${profit === null ? 'm' : profit >= 0 ? 'g' : 'r'}">
+          ${profit === null ? 'হিসাব সম্ভব নয়' : (profit >= 0 ? '+' : '') + '৳' + profit.toLocaleString('bn-BD')}
+        </span>
+      </div>
+      ${margin !== null ? `
+      <div class="profit-bar-wrap">
+        <div class="profit-bar-label">
+          <span>মার্জিন</span>
+          <span>${profit >= 0 ? '+' : ''}${margin}%</span>
+        </div>
+        <div class="profit-bar-bg">
+          <div class="profit-bar-fill ${barCls}" style="width:${barW}%"></div>
+        </div>
+      </div>` : ''}
+    </div>`;
+      }).join('');
+    }
+
+    function renderTable(filter) {
+      const filtered = filter === 'all' ? books : books.filter(b => getStatus(b) === filter);
+      document.getElementById('tableBody').innerHTML = filtered.map(b => {
+        const status = getStatus(b);
+        const profit = getProfit(b);
+        const margin = profit != null && b.buy ? pct(profit, b.buy) : null;
+        const pillCls = status === 'profit' ? 'pill-g' : status === 'loss' ? 'pill-r' : status === 'unsold' ? 'pill-y' : 'pill-m';
+        return `<tr>
+      <td class="td-num">#${b.num}</td>
+      <td class="td-name">${b.name}${b.buyNote ? `<span class="note-tag">${b.buyNote}</span>` : ''}</td>
+      <td>${b.mrp ? '৳' + b.mrp.toLocaleString('bn-BD') : '<span class="td-m">—</span>'}</td>
+      <td>${b.buy ? '৳' + b.buy.toLocaleString('bn-BD') : '<span class="td-m">তথ্য নেই</span>'}</td>
+      <td>${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="td-y">${b.sellNote || 'তথ্য নেই'}</span>`}</td>
+      <td class="${profit === null ? 'td-m' : profit >= 0 ? 'td-g' : 'td-r'}">
+        ${profit === null ? '—' : (profit >= 0 ? '+' : '') + '৳' + profit.toLocaleString('bn-BD')}
+      </td>
+      <td>${margin !== null ? `<span class="${profit >= 0 ? 'td-g' : 'td-r'}">${profit >= 0 ? '+' : ''}${margin}%</span>` : '<span class="td-m">—</span>'}</td>
+      <td><span class="profit-pill ${pillCls}">${statusLabel(status)}</span></td>
+    </tr>`;
+      }).join('');
+    }
+
+    function setFilter(f, el) {
+      currentFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      renderCards(f);
+      renderTable(f);
+    }
+
+    function setView(v) {
+      currentView = v;
+      const cardEl = document.getElementById('cardsGrid');
+      const tableEl = document.getElementById('tableWrap');
+      const btnCard = document.getElementById('vbtnCard');
+      const btnTable = document.getElementById('vbtnTable');
+      if (v === 'card') {
+        cardEl.style.display = '';
+        tableEl.style.display = 'none';
+        btnCard.classList.add('active');
+        btnTable.classList.remove('active');
+      } else {
+        cardEl.style.display = 'none';
+        tableEl.style.display = '';
+        btnTable.classList.add('active');
+        btnCard.classList.remove('active');
+      }
+    }
+
+    // Date
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('bn-BD', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    renderSummary();
+    renderCards('all');
+    renderTable('all');
+
+    // Animate bars after paint
+    setTimeout(() => {
+      document.querySelectorAll('.profit-bar-fill').forEach(el => {
+        const w = el.style.width;
+        el.style.width = '0';
+        requestAnimationFrame(() => { el.style.width = w; });
+      });
+    }, 100);
+  </script>
+</body>
+
+</html>
