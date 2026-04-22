@@ -98,7 +98,7 @@
     /* SUMMARY CARDS */
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 14px;
       max-width: 1100px;
       margin: 28px auto 0;
@@ -109,7 +109,7 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 18px 16px;
+      padding: 18px 12px;
       text-align: center;
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
@@ -131,63 +131,18 @@
       border-radius: 16px 16px 0 0;
     }
 
-    .stat-card.blue::before {
-      background: linear-gradient(90deg, var(--accent), #a78bfa);
-    }
-
-    .stat-card.green::before {
-      background: linear-gradient(90deg, var(--green), #06d6a0);
-    }
-
-    .stat-card.red::before {
-      background: linear-gradient(90deg, var(--red), #ff758c);
-    }
-
-    .stat-card.yellow::before {
-      background: linear-gradient(90deg, var(--yellow), #f9a825);
-    }
-
-    .stat-card.gold::before {
-      background: linear-gradient(90deg, var(--gold), #f4a642);
-    }
-
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    .stat-val {
-      font-size: 1.45rem;
-      font-weight: 700;
-    }
-
-    .stat-val.blue {
-      color: #a78bfa;
-    }
-
-    .stat-val.green {
-      color: var(--green);
-    }
-
-    .stat-val.red {
-      color: var(--red);
-    }
-
-    .stat-val.yellow {
-      color: var(--yellow);
-    }
-
-    .stat-val.gold {
-      color: var(--gold);
-    }
-
-    .stat-sub {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
+    .stat-card.blue::before { background: linear-gradient(90deg, var(--accent), #a78bfa); }
+    .stat-card.green::before { background: linear-gradient(90deg, var(--green), #06d6a0); }
+    .stat-card.red::before { background: linear-gradient(90deg, var(--red), #ff758c); }
+    .stat-card.yellow::before { background: linear-gradient(90deg, var(--yellow), #f9a825); }
+    
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+    .stat-val { font-size: 1.35rem; font-weight: 700; }
+    .stat-val.blue { color: #a78bfa; }
+    .stat-val.green { color: var(--green); }
+    .stat-val.red { color: var(--red); }
+    .stat-val.yellow { color: var(--yellow); }
+    .stat-sub { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
 
     /* FILTER BAR */
     .filter-bar {
@@ -265,21 +220,10 @@
       box-shadow: 0 10px 36px rgba(108, 99, 255, 0.14);
     }
 
-    .book-card.profit {
-      border-left: 3px solid var(--green);
-    }
-
-    .book-card.loss {
-      border-left: 3px solid var(--red);
-    }
-
-    .book-card.unsold {
-      border-left: 3px solid var(--yellow);
-    }
-
-    .book-card.nodata {
-      border-left: 3px solid var(--muted);
-    }
+    .book-card.profit { border-left: 3px solid var(--green); }
+    .book-card.loss { border-left: 3px solid var(--red); }
+    .book-card.unsold { border-left: 3px solid var(--yellow); }
+    .book-card.nodata { border-left: 3px solid var(--muted); }
 
     .card-header {
       display: flex;
@@ -316,25 +260,10 @@
       flex-shrink: 0;
     }
 
-    .badge.profit {
-      background: rgba(0, 229, 160, 0.12);
-      color: var(--green);
-    }
-
-    .badge.loss {
-      background: rgba(255, 77, 109, 0.12);
-      color: var(--red);
-    }
-
-    .badge.unsold {
-      background: rgba(255, 209, 102, 0.12);
-      color: var(--yellow);
-    }
-
-    .badge.nodata {
-      background: rgba(139, 147, 196, 0.1);
-      color: var(--muted);
-    }
+    .badge.profit { background: rgba(0, 229, 160, 0.12); color: var(--green); }
+    .badge.loss { background: rgba(255, 77, 109, 0.12); color: var(--red); }
+    .badge.unsold { background: rgba(255, 209, 102, 0.12); color: var(--yellow); }
+    .badge.nodata { background: rgba(139, 147, 196, 0.1); color: var(--muted); }
 
     .card-row {
       display: flex;
@@ -349,62 +278,35 @@
       border-bottom: none;
     }
 
-    .card-row .lbl {
-      color: var(--muted);
-    }
+    .card-row .lbl { color: var(--muted); }
+    .card-row .val { font-weight: 600; }
+    .val.g { color: var(--green); }
+    .val.r { color: var(--red); }
+    .val.y { color: var(--yellow); }
+    .val.m { color: var(--muted); font-weight: 400; }
 
-    .card-row .val {
-      font-weight: 600;
-    }
-
-    .val.g {
-      color: var(--green);
-    }
-
-    .val.r {
-      color: var(--red);
-    }
-
-    .val.y {
-      color: var(--yellow);
-    }
-
-    .val.m {
-      color: var(--muted);
-    }
-
-    .profit-bar-wrap {
-      margin-top: 12px;
-    }
-
-    .profit-bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .profit-bar-bg {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.06);
+    /* New Details Box */
+    .details-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.08);
       border-radius: 10px;
-      overflow: hidden;
+      padding: 8px 12px;
+      margin: 12px 0;
     }
+    .details-box .card-row {
+      padding: 4px 0;
+      font-size: 0.82rem;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+    }
+    .details-box .card-row:last-child { border-bottom: none; }
+    .details-box .lbl { color: #a78bfa; font-size: 0.8rem; }
 
-    .profit-bar-fill {
-      height: 100%;
-      border-radius: 10px;
-      transition: width 1s cubic-bezier(.4, 0, .2, 1);
-    }
-
-    .profit-bar-fill.green {
-      background: linear-gradient(90deg, var(--green), #06d6a0);
-    }
-
-    .profit-bar-fill.red {
-      background: linear-gradient(90deg, var(--red), #ff758c);
-    }
+    .profit-bar-wrap { margin-top: 12px; }
+    .profit-bar-label { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-bottom: 5px; }
+    .profit-bar-bg { height: 6px; background: rgba(255, 255, 255, 0.06); border-radius: 10px; overflow: hidden; }
+    .profit-bar-fill { height: 100%; border-radius: 10px; transition: width 1s cubic-bezier(.4, 0, .2, 1); }
+    .profit-bar-fill.green { background: linear-gradient(90deg, var(--green), #06d6a0); }
+    .profit-bar-fill.red { background: linear-gradient(90deg, var(--red), #ff758c); }
 
     /* DESKTOP TABLE */
     .table-wrap {
@@ -417,12 +319,10 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 0.88rem;
+      min-width: 900px;
     }
 
-    thead tr {
-      background: var(--card2);
-    }
-
+    thead tr { background: var(--card2); }
     thead th {
       padding: 12px 16px;
       text-align: left;
@@ -439,43 +339,15 @@
       border-bottom: 1px solid var(--border);
       transition: background 0.15s;
     }
+    tbody tr:hover { background: var(--card2); }
+    tbody td { padding: 12px 16px; vertical-align: middle; }
 
-    tbody tr:hover {
-      background: var(--card2);
-    }
-
-    tbody td {
-      padding: 12px 16px;
-      vertical-align: middle;
-    }
-
-    .td-num {
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .td-name {
-      font-weight: 600;
-    }
-
-    .td-g {
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    .td-r {
-      color: var(--red);
-      font-weight: 600;
-    }
-
-    .td-y {
-      color: var(--yellow);
-      font-weight: 600;
-    }
-
-    .td-m {
-      color: var(--muted);
-    }
+    .td-num { color: var(--muted); font-size: 0.8rem; }
+    .td-name { font-weight: 600; }
+    .td-g { color: var(--green); font-weight: 600; }
+    .td-r { color: var(--red); font-weight: 600; }
+    .td-y { color: var(--yellow); font-weight: 600; }
+    .td-m { color: var(--muted); }
 
     .profit-pill {
       display: inline-block;
@@ -485,25 +357,10 @@
       font-weight: 700;
     }
 
-    .pill-g {
-      background: rgba(0, 229, 160, 0.12);
-      color: var(--green);
-    }
-
-    .pill-r {
-      background: rgba(255, 77, 109, 0.12);
-      color: var(--red);
-    }
-
-    .pill-y {
-      background: rgba(255, 209, 102, 0.12);
-      color: var(--yellow);
-    }
-
-    .pill-m {
-      background: rgba(139, 147, 196, 0.1);
-      color: var(--muted);
-    }
+    .pill-g { background: rgba(0, 229, 160, 0.12); color: var(--green); }
+    .pill-r { background: rgba(255, 77, 109, 0.12); color: var(--red); }
+    .pill-y { background: rgba(255, 209, 102, 0.12); color: var(--yellow); }
+    .pill-m { background: rgba(139, 147, 196, 0.1); color: var(--muted); }
 
     /* VIEW TOGGLE */
     .view-toggle {
@@ -531,17 +388,9 @@
 
     /* RESPONSIVE */
     @media (max-width: 700px) {
-      h1 {
-        font-size: 1.4rem;
-      }
-
-      .summary-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
+      h1 { font-size: 1.4rem; }
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .cards-grid { grid-template-columns: 1fr; }
     }
 
     .footer {
@@ -564,15 +413,8 @@
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: 0.4
-      }
+      0%, 100% { opacity: 1 }
+      50% { opacity: 0.4 }
     }
 
     .note-tag {
@@ -617,7 +459,7 @@
   <div class="section">
     <div class="section-title">
       📖 বইয়ের বিস্তারিত হিসাব
-      <span id="countLabel">৮টি বই</span>
+      <span id="countLabel">০টি বই</span>
     </div>
     <div class="cards-grid card-view" id="cardsGrid"></div>
     <div class="table-wrap table-view" id="tableWrap" style="display:none">
@@ -627,10 +469,12 @@
             <th>বই নং</th>
             <th>বইয়ের নাম</th>
             <th>MRP</th>
+            <th>ক্রয় ছাড়</th>
             <th>কেনা মূল্য</th>
+            <th>বিবিধ খরচ</th>
+            <th>মোট ব্যয়</th>
             <th>বিক্রি মূল্য</th>
-            <th>লাভ/ক্ষতি</th>
-            <th>মার্জিন</th>
+            <th>অবশিষ্ট টাকা</th>
             <th>অবস্থা</th>
           </tr>
         </thead>
@@ -645,29 +489,41 @@
   </div>
 
   <script>
+    // 💡 এখানে আপনি বইয়ের তথ্য, তারিখ, অর্ডার, এবং বিবিধ খরচ ইচ্ছামতো আপডেট করতে পারবেন
     const books = [
-      { num: '০১', name: 'সাপ্লিমেন্ট বই', mrp: 350, buy: 290, sell: 400 },
-      { num: '০২', name: 'হান্টিং এডেলিন সিরিজ (২ বই)', mrp: 750, buy: 370, sell: 640 },
-      { num: '০৩', name: 'কাঠগোলাপ', mrp: 266, buy: 100, sell: 210 },
-      { num: '০৪', name: 'ক্লাস ৮ আদিল ফুল সেট গাইড', mrp: null, buy: 2300, sell: 2400, buyNote: '১৫% ডিসকাউন্টে' },
-      { num: '০৫', name: 'কোহিনূর ২', mrp: 800, buy: 480, sell: 600 },
-      { num: '০৬', name: 'কোহিনূর ১', mrp: 280, buy: null, sell: null, sellNote: 'বিক্রি হয়নি' },
-      { num: '০৭', name: 'পথের পাঁচালী', mrp: 330, buy: null, sell: 280 },
-      { num: '০৮', name: 'এডেলিন', mrp: 650, buy: null, sell: null, sellNote: 'বিক্রি হয়নি' },
+      { num: '০১', name: 'সাপ্লিমেন্ট বই', mrp: 350, buy: 290, sell: 400, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০২', name: 'হান্টিং এডেলিন সিরিজ (২ বই)', mrp: 750, buy: 370, sell: 640, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০৩', name: 'কাঠগোলাপ', mrp: 266, buy: 100, sell: 210, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০৪', name: 'ক্লাস ৮ আদিল ফুল সেট গাইড', mrp: null, buy: 2300, sell: 2400, buyNote: '১৫% ডিসকাউন্টে', buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০৫', name: 'কোহিনূর ২', mrp: 800, buy: 480, sell: 600, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০৬', name: 'কোহিনূর ১', mrp: 280, buy: null, sell: null, sellNote: 'বিক্রি হয়নি', buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০৭', name: 'পথের পাঁচালী', mrp: 330, buy: null, sell: 280, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০৮', name: 'এডেলিন', mrp: 650, buy: null, sell: null, sellNote: 'বিক্রি হয়নি', buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { num: '০৯', name: 'কোহিনূর ২ (২য় কপি)', mrp: 800, buy: 480, sell: 600, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
     ];
 
     function tk(n) { return n != null ? '৳' + n.toLocaleString('bn-BD') : null; }
-    function pct(profit, buy) { return buy ? ((profit / buy) * 100).toFixed(1) : null; }
+    function pct(profit, cost) { return cost ? ((profit / cost) * 100).toFixed(1) : null; }
+
+    function getBuyDiscount(b) {
+      if (b.mrp && b.buy) {
+        const d = ((b.mrp - b.buy) / b.mrp) * 100;
+        return d.toFixed(1) + '%';
+      }
+      return '—';
+    }
 
     function getStatus(b) {
       if (b.sell === null) return 'unsold';
       if (b.buy === null) return 'nodata';
-      return b.sell >= b.buy ? 'profit' : 'loss';
+      const totalCost = (b.buy || 0) + (b.miscCost || 0);
+      return b.sell >= totalCost ? 'profit' : 'loss';
     }
 
-    function getProfit(b) {
+    function getRemaining(b) {
       if (b.buy == null || b.sell == null) return null;
-      return b.sell - b.buy;
+      const totalCost = (b.buy || 0) + (b.miscCost || 0);
+      return b.sell - totalCost;
     }
 
     function statusLabel(s) {
@@ -680,27 +536,34 @@
     // Summary
     function renderSummary() {
       const sold = books.filter(b => b.sell !== null && b.buy !== null);
+      
       const totalBuy = sold.reduce((a, b) => a + b.buy, 0);
+      const totalMisc = sold.reduce((a, b) => a + (b.miscCost || 0), 0);
+      const totalInv = totalBuy + totalMisc;
+      
       const totalSell = sold.reduce((a, b) => a + b.sell, 0);
-      const totalProfit = totalSell - totalBuy;
+      const totalProfit = totalSell - totalInv;
+      
       const profitBooks = books.filter(b => getStatus(b) === 'profit').length;
       const lossBooks = books.filter(b => getStatus(b) === 'loss').length;
       const unsoldBooks = books.filter(b => getStatus(b) === 'unsold').length;
 
       const stats = [
-        { label: 'মোট বিনিয়োগ', val: '৳' + totalBuy.toLocaleString('bn-BD'), cls: 'blue', sub: sold.length + 'টি বইয়ের তথ্য' },
+        { label: 'মোট বই ক্রয়', val: '৳' + totalBuy.toLocaleString('bn-BD'), cls: 'blue', sub: sold.length + 'টি বইয়ের দাম' },
+        { label: 'মোট বিবিধ খরচ', val: '৳' + totalMisc.toLocaleString('bn-BD'), cls: 'yellow', sub: 'যাতায়াত ও অন্যান্য' },
+        { label: 'মোট বিনিয়োগ', val: '৳' + totalInv.toLocaleString('bn-BD'), cls: 'blue', sub: 'ক্রয় + বিবিধ খরচ' },
         { label: 'মোট বিক্রয়', val: '৳' + totalSell.toLocaleString('bn-BD'), cls: 'blue', sub: 'বিক্রীত বইসমূহ' },
-        { label: 'মোট লাভ', val: (totalProfit >= 0 ? '+' : '') + '৳' + totalProfit.toLocaleString('bn-BD'), cls: totalProfit >= 0 ? 'green' : 'red', sub: pct(totalProfit, totalBuy) + '% মার্জিন' },
+        { label: 'মোট অবশিষ্ট (লাভ)', val: (totalProfit >= 0 ? '+' : '') + '৳' + totalProfit.toLocaleString('bn-BD'), cls: totalProfit >= 0 ? 'green' : 'red', sub: pct(totalProfit, totalInv) + '% মার্জিন' },
         { label: 'লাভজনক বই', val: profitBooks + 'টি', cls: 'green', sub: 'মোট ' + books.length + 'টির মধ্যে' },
-        { label: 'ক্ষতির বই', val: lossBooks + 'টি', cls: 'red', sub: 'বিক্রয় < ক্রয় মূল্য' },
-        { label: 'অবিক্রীত বই', val: unsoldBooks + 'টি', cls: 'yellow', sub: 'এখনো বিক্রি হয়নি' },
+        { label: 'অবিক্রীত বই', val: unsoldBooks + 'টি', cls: 'yellow', sub: 'এখনো বিক্রি হয়নি' }
       ];
+      
       document.getElementById('summaryGrid').innerHTML = stats.map(s => `
-    <div class="stat-card ${s.cls}">
-      <div class="stat-label">${s.label}</div>
-      <div class="stat-val ${s.cls}">${s.val}</div>
-      <div class="stat-sub">${s.sub}</div>
-    </div>`).join('');
+        <div class="stat-card ${s.cls}">
+          <div class="stat-label">${s.label}</div>
+          <div class="stat-val ${s.cls}">${s.val}</div>
+          <div class="stat-sub">${s.sub}</div>
+        </div>`).join('');
     }
 
     // Cards
@@ -714,47 +577,74 @@
 
       grid.innerHTML = filtered.map(b => {
         const status = getStatus(b);
-        const profit = getProfit(b);
-        const margin = profit != null && b.buy ? pct(profit, b.buy) : null;
+        const profit = getRemaining(b);
+        const totalCost = (b.buy || 0) + (b.miscCost || 0);
+        const margin = profit != null && totalCost ? pct(profit, totalCost) : null;
+        
         const maxMargin = 60;
         const barW = margin ? Math.min(Math.abs(parseFloat(margin)), maxMargin) / maxMargin * 100 : 0;
         const barCls = profit >= 0 ? 'green' : 'red';
 
-        return `<div class="book-card ${status}">
-      <div class="card-header">
-        <span class="book-num">#${b.num}</span>
-        <span class="book-name">${b.name}</span>
-        <span class="badge ${status}">${statusLabel(status)}</span>
-      </div>
-      <div class="card-row">
-        <span class="lbl">প্রকৃত মূল্য (MRP)</span>
-        <span class="val">${b.mrp ? '৳' + b.mrp.toLocaleString('bn-BD') : '<span class="m">জানা নাই</span>'}</span>
-      </div>
-      <div class="card-row">
-        <span class="lbl">কেনা মূল্য</span>
-        <span class="val">${b.buy ? '৳' + b.buy.toLocaleString('bn-BD') + (b.buyNote ? `<span class="note-tag">${b.buyNote}</span>` : '') : '<span class="m">তথ্য নেই</span>'}</span>
-      </div>
-      <div class="card-row">
-        <span class="lbl">বিক্রি মূল্য</span>
-        <span class="val">${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="y">${b.sellNote || 'তথ্য নেই'}</span>`}</span>
-      </div>
-      <div class="card-row">
-        <span class="lbl">লাভ / ক্ষতি</span>
-        <span class="val ${profit === null ? 'm' : profit >= 0 ? 'g' : 'r'}">
-          ${profit === null ? 'হিসাব সম্ভব নয়' : (profit >= 0 ? '+' : '') + '৳' + profit.toLocaleString('bn-BD')}
-        </span>
-      </div>
-      ${margin !== null ? `
-      <div class="profit-bar-wrap">
-        <div class="profit-bar-label">
-          <span>মার্জিন</span>
-          <span>${profit >= 0 ? '+' : ''}${margin}%</span>
-        </div>
-        <div class="profit-bar-bg">
-          <div class="profit-bar-fill ${barCls}" style="width:${barW}%"></div>
-        </div>
-      </div>` : ''}
-    </div>`;
+        return `
+        <div class="book-card ${status}">
+          <div class="card-header">
+            <span class="book-num">#${b.num}</span>
+            <span class="book-name">${b.name}</span>
+            <span class="badge ${status}">${statusLabel(status)}</span>
+          </div>
+          
+          <div class="card-row">
+            <span class="lbl">প্রকৃত মূল্য (MRP)</span>
+            <span class="val">${b.mrp ? '৳' + b.mrp.toLocaleString('bn-BD') : '<span class="m">জানা নাই</span>'}</span>
+          </div>
+          <div class="card-row">
+            <span class="lbl">ক্রয় ডিসকাউন্ট</span>
+            <span class="val" style="color: #a78bfa;">${getBuyDiscount(b)}</span>
+          </div>
+          <div class="card-row">
+            <span class="lbl">কেনা মূল্য</span>
+            <span class="val">${b.buy ? '৳' + b.buy.toLocaleString('bn-BD') + (b.buyNote ? `<span class="note-tag">${b.buyNote}</span>` : '') : '<span class="m">তথ্য নেই</span>'}</span>
+          </div>
+
+          <div class="details-box">
+            <div class="card-row"><span class="lbl">কেনার তারিখ:</span> <span class="val m">${b.buyDate || '—'}</span></div>
+            <div class="card-row"><span class="lbl">বিক্রির তারিখ:</span> <span class="val m">${b.sellDate || '—'}</span></div>
+            <div class="card-row"><span class="lbl">কেনার জন্য গেছে:</span> <span class="val m">${b.buyers || '—'}</span></div>
+            <div class="card-row"><span class="lbl">অর্ডার করেছে:</span> <span class="val m">${b.orderedBy || '—'}</span></div>
+          </div>
+
+          <div class="card-row">
+            <span class="lbl">বিবিধ খরচ ${b.miscDesc ? `<span class="m" style="font-size:0.75rem">(${b.miscDesc})</span>` : ''}</span>
+            <span class="val">${b.miscCost ? '+ ৳' + b.miscCost.toLocaleString('bn-BD') : '<span class="m">নেই</span>'}</span>
+          </div>
+          <div class="card-row" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
+            <span class="lbl">মোট ব্যয় (বই + বিবিধ)</span>
+            <span class="val">${totalCost ? '৳' + totalCost.toLocaleString('bn-BD') : '<span class="m">—</span>'}</span>
+          </div>
+          
+          <div class="card-row" style="margin-top: 8px;">
+            <span class="lbl">বিক্রি মূল্য</span>
+            <span class="val">${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="y">${b.sellNote || 'তথ্য নেই'}</span>`}</span>
+          </div>
+          
+          <div class="card-row" style="margin-top: 6px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15);">
+            <span class="lbl" style="color: #fff; font-weight: 600;">অবশিষ্ট টাকা (লাভ)</span>
+            <span class="val ${profit === null ? 'm' : profit >= 0 ? 'g' : 'r'}" style="font-size: 1.1rem;">
+              ${profit === null ? 'হিসাব সম্ভব নয়' : (profit >= 0 ? '+' : '') + '৳' + profit.toLocaleString('bn-BD')}
+            </span>
+          </div>
+
+          ${margin !== null ? `
+          <div class="profit-bar-wrap">
+            <div class="profit-bar-label">
+              <span>মার্জিন</span>
+              <span>${profit >= 0 ? '+' : ''}${margin}%</span>
+            </div>
+            <div class="profit-bar-bg">
+              <div class="profit-bar-fill ${barCls}" style="width:${barW}%"></div>
+            </div>
+          </div>` : ''}
+        </div>`;
       }).join('');
     }
 
@@ -762,21 +652,25 @@
       const filtered = filter === 'all' ? books : books.filter(b => getStatus(b) === filter);
       document.getElementById('tableBody').innerHTML = filtered.map(b => {
         const status = getStatus(b);
-        const profit = getProfit(b);
-        const margin = profit != null && b.buy ? pct(profit, b.buy) : null;
+        const profit = getRemaining(b);
+        const totalCost = (b.buy || 0) + (b.miscCost || 0);
+        const margin = profit != null && totalCost ? pct(profit, totalCost) : null;
         const pillCls = status === 'profit' ? 'pill-g' : status === 'loss' ? 'pill-r' : status === 'unsold' ? 'pill-y' : 'pill-m';
+        
         return `<tr>
-      <td class="td-num">#${b.num}</td>
-      <td class="td-name">${b.name}${b.buyNote ? `<span class="note-tag">${b.buyNote}</span>` : ''}</td>
-      <td>${b.mrp ? '৳' + b.mrp.toLocaleString('bn-BD') : '<span class="td-m">—</span>'}</td>
-      <td>${b.buy ? '৳' + b.buy.toLocaleString('bn-BD') : '<span class="td-m">তথ্য নেই</span>'}</td>
-      <td>${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="td-y">${b.sellNote || 'তথ্য নেই'}</span>`}</td>
-      <td class="${profit === null ? 'td-m' : profit >= 0 ? 'td-g' : 'td-r'}">
-        ${profit === null ? '—' : (profit >= 0 ? '+' : '') + '৳' + profit.toLocaleString('bn-BD')}
-      </td>
-      <td>${margin !== null ? `<span class="${profit >= 0 ? 'td-g' : 'td-r'}">${profit >= 0 ? '+' : ''}${margin}%</span>` : '<span class="td-m">—</span>'}</td>
-      <td><span class="profit-pill ${pillCls}">${statusLabel(status)}</span></td>
-    </tr>`;
+          <td class="td-num">#${b.num}</td>
+          <td class="td-name">${b.name}${b.buyNote ? `<span class="note-tag">${b.buyNote}</span>` : ''}</td>
+          <td>${b.mrp ? '৳' + b.mrp.toLocaleString('bn-BD') : '<span class="td-m">—</span>'}</td>
+          <td style="color: #a78bfa; font-weight: 600;">${getBuyDiscount(b)}</td>
+          <td>${b.buy ? '৳' + b.buy.toLocaleString('bn-BD') : '<span class="td-m">—</span>'}</td>
+          <td>${b.miscCost ? '৳' + b.miscCost.toLocaleString('bn-BD') + (b.miscDesc ? `<br><span style="font-size:0.7rem;color:var(--muted)">(${b.miscDesc})</span>` : '') : '<span class="td-m">—</span>'}</td>
+          <td style="font-weight: 600;">${totalCost ? '৳' + totalCost.toLocaleString('bn-BD') : '<span class="td-m">—</span>'}</td>
+          <td>${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="td-y">${b.sellNote || 'তথ্য নেই'}</span>`}</td>
+          <td class="${profit === null ? 'td-m' : profit >= 0 ? 'td-g' : 'td-r'}" style="font-size: 1rem;">
+            ${profit === null ? '—' : (profit >= 0 ? '+' : '') + '৳' + profit.toLocaleString('bn-BD')}
+          </td>
+          <td><span class="profit-pill ${pillCls}">${statusLabel(status)}</span></td>
+        </tr>`;
       }).join('');
     }
 
