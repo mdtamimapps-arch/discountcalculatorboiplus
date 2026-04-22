@@ -24,118 +24,26 @@
       --gold: #f4c542;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Hind Siliguri', 'Inter', sans-serif;
-      min-height: 100vh;
-      padding-bottom: 60px;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Hind Siliguri', 'Inter', sans-serif; min-height: 100vh; padding-bottom: 60px; }
 
     /* HEADER */
-    header {
-      background: linear-gradient(135deg, #1a1040 0%, #0d0f1a 60%, #0f1f3d 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 28px 24px 22px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      height: 200px;
-      background: radial-gradient(ellipse, rgba(108, 99, 255, 0.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .logo-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 6px;
-    }
-
-    .logo-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-top: 4px;
-    }
+    header { background: linear-gradient(135deg, #1a1040 0%, #0d0f1a 60%, #0f1f3d 100%); border-bottom: 1px solid var(--border); padding: 28px 24px 22px; text-align: center; position: relative; overflow: hidden; }
+    header::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 400px; height: 200px; background: radial-gradient(ellipse, rgba(108, 99, 255, 0.18) 0%, transparent 70%); pointer-events: none; }
+    .logo-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 6px; }
+    .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4); }
+    h1 { font-size: 2rem; font-weight: 700; letter-spacing: 1px; background: linear-gradient(90deg, var(--accent), #a78bfa, var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
 
     /* SUMMARY CARDS */
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 14px;
-      max-width: 1100px;
-      margin: 28px auto 0;
-      padding: 0 18px;
-    }
-
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px 12px;
-      text-align: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(108, 99, 255, 0.15);
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      border-radius: 16px 16px 0 0;
-    }
-
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; max-width: 1100px; margin: 28px auto 0; padding: 0 18px; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 12px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(108, 99, 255, 0.15); }
+    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 16px 16px 0 0; }
     .stat-card.blue::before { background: linear-gradient(90deg, var(--accent), #a78bfa); }
     .stat-card.green::before { background: linear-gradient(90deg, var(--green), #06d6a0); }
     .stat-card.red::before { background: linear-gradient(90deg, var(--red), #ff758c); }
     .stat-card.yellow::before { background: linear-gradient(90deg, var(--yellow), #f9a825); }
-    
     .stat-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
     .stat-val { font-size: 1.35rem; font-weight: 700; }
     .stat-val.blue { color: #a78bfa; }
@@ -145,139 +53,33 @@
     .stat-sub { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
 
     /* FILTER BAR */
-    .filter-bar {
-      max-width: 1100px;
-      margin: 24px auto 0;
-      padding: 0 18px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .filter-btn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 30px;
-      padding: 7px 18px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-      box-shadow: 0 2px 12px rgba(108, 99, 255, 0.3);
-    }
+    .filter-bar { max-width: 1100px; margin: 24px auto 0; padding: 0 18px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .filter-btn { background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 30px; padding: 7px 18px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 2px 12px rgba(108, 99, 255, 0.3); }
 
     /* TABLE SECTION */
-    .section {
-      max-width: 1100px;
-      margin: 24px auto 0;
-      padding: 0 18px;
-    }
+    .section { max-width: 1100px; margin: 24px auto 0; padding: 0 18px; }
+    .section-title { font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .section-title span { color: var(--muted); font-size: 0.85rem; font-weight: 400; }
 
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title span {
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-weight: 400;
-    }
-
-    /* BOOK CARDS (mobile) */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 16px;
-    }
-
-    .book-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px 20px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .book-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 36px rgba(108, 99, 255, 0.14);
-    }
-
+    /* BOOK CARDS */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
+    .book-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px 20px; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+    .book-card:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(108, 99, 255, 0.14); }
     .book-card.profit { border-left: 3px solid var(--green); }
     .book-card.loss { border-left: 3px solid var(--red); }
     .book-card.unsold { border-left: 3px solid var(--yellow); }
     .book-card.nodata { border-left: 3px solid var(--muted); }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .book-num {
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.8rem;
-      padding: 3px 10px;
-      border-radius: 20px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .book-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-      flex: 1;
-    }
-
-    .badge {
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    .book-num { background: linear-gradient(135deg, var(--accent), #a78bfa); color: #fff; font-weight: 700; font-size: 0.8rem; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .book-name { font-size: 1rem; font-weight: 600; color: var(--text); flex: 1; }
+    .badge { padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
     .badge.profit { background: rgba(0, 229, 160, 0.12); color: var(--green); }
     .badge.loss { background: rgba(255, 77, 109, 0.12); color: var(--red); }
     .badge.unsold { background: rgba(255, 209, 102, 0.12); color: var(--yellow); }
     .badge.nodata { background: rgba(139, 147, 196, 0.1); color: var(--muted); }
-
-    .card-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      font-size: 0.87rem;
-    }
-
-    .card-row:last-child {
-      border-bottom: none;
-    }
-
+    .card-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.04); font-size: 0.87rem; }
+    .card-row:last-child { border-bottom: none; }
     .card-row .lbl { color: var(--muted); }
     .card-row .val { font-weight: 600; }
     .val.g { color: var(--green); }
@@ -286,18 +88,8 @@
     .val.m { color: var(--muted); font-weight: 400; }
 
     /* New Details Box */
-    .details-box {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px dashed rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 8px 12px;
-      margin: 12px 0;
-    }
-    .details-box .card-row {
-      padding: 4px 0;
-      font-size: 0.82rem;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
-    }
+    .details-box { background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 8px 12px; margin: 12px 0; }
+    .details-box .card-row { padding: 4px 0; font-size: 0.82rem; border-bottom: 1px dashed rgba(255, 255, 255, 0.03); }
     .details-box .card-row:last-child { border-bottom: none; }
     .details-box .lbl { color: #a78bfa; font-size: 0.8rem; }
 
@@ -309,82 +101,29 @@
     .profit-bar-fill.red { background: linear-gradient(90deg, var(--red), #ff758c); }
 
     /* DESKTOP TABLE */
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-      min-width: 900px;
-    }
-
+    .table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 1000px; }
     thead tr { background: var(--card2); }
-    thead th {
-      padding: 12px 16px;
-      text-align: left;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid var(--border);
-      white-space: nowrap;
-    }
-
-    tbody tr {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-    }
+    thead th { padding: 12px 16px; text-align: left; color: var(--muted); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    tbody tr { background: var(--card); border-bottom: 1px solid var(--border); transition: background 0.15s; }
     tbody tr:hover { background: var(--card2); }
     tbody td { padding: 12px 16px; vertical-align: middle; }
-
     .td-num { color: var(--muted); font-size: 0.8rem; }
     .td-name { font-weight: 600; }
     .td-g { color: var(--green); font-weight: 600; }
     .td-r { color: var(--red); font-weight: 600; }
     .td-y { color: var(--yellow); font-weight: 600; }
     .td-m { color: var(--muted); }
-
-    .profit-pill {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
+    .profit-pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
     .pill-g { background: rgba(0, 229, 160, 0.12); color: var(--green); }
     .pill-r { background: rgba(255, 77, 109, 0.12); color: var(--red); }
     .pill-y { background: rgba(255, 209, 102, 0.12); color: var(--yellow); }
     .pill-m { background: rgba(139, 147, 196, 0.1); color: var(--muted); }
 
     /* VIEW TOGGLE */
-    .view-toggle {
-      display: flex;
-      gap: 8px;
-      margin-left: auto;
-    }
-
-    .vbtn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-
-    .vbtn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
+    .view-toggle { display: flex; gap: 8px; margin-left: auto; }
+    .vbtn { background: var(--card); border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+    .vbtn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
     /* RESPONSIVE */
     @media (max-width: 700px) {
@@ -392,40 +131,10 @@
       .summary-grid { grid-template-columns: repeat(2, 1fr); }
       .cards-grid { grid-template-columns: 1fr; }
     }
-
-    .footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin-top: 40px;
-      padding: 0 18px;
-    }
-
-    .glow-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--green);
-      margin-right: 6px;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1 }
-      50% { opacity: 0.4 }
-    }
-
-    .note-tag {
-      display: inline-block;
-      background: rgba(255, 209, 102, 0.1);
-      color: var(--yellow);
-      border-radius: 6px;
-      font-size: 0.72rem;
-      padding: 1px 7px;
-      margin-left: 6px;
-    }
+    .footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 40px; padding: 0 18px; }
+    .glow-dot { display: inline-block; width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); margin-right: 6px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.4 } }
+    .note-tag { display: inline-block; background: rgba(255, 209, 102, 0.1); color: var(--yellow); border-radius: 6px; font-size: 0.72rem; padding: 1px 7px; margin-left: 6px; }
   </style>
 </head>
 
@@ -455,7 +164,7 @@
     </div>
   </div>
 
-  <!-- CARD VIEW -->
+  <!-- VIEWS -->
   <div class="section">
     <div class="section-title">
       📖 বইয়ের বিস্তারিত হিসাব
@@ -474,6 +183,8 @@
             <th>বিবিধ খরচ</th>
             <th>মোট ব্যয়</th>
             <th>বিক্রি মূল্য</th>
+            <th>বিক্রয় ছাড়</th>
+            <th>লাভের হার</th>
             <th>অবশিষ্ট টাকা</th>
             <th>অবস্থা</th>
           </tr>
@@ -485,22 +196,107 @@
 
   <div class="footer">
     <span class="glow-dot"></span>
-    Boi Plus Inventory &nbsp;|&nbsp; সর্বশেষ আপডেট: <span id="lastUpdate"></span>
+    Boi Plus Inventory Dev_by_MMHT &nbsp;|&nbsp; সর্বশেষ আপডেট: <span id="lastUpdate"></span>
   </div>
 
   <script>
-    // 💡 এখানে আপনি বইয়ের তথ্য, তারিখ, অর্ডার, এবং বিবিধ খরচ ইচ্ছামতো আপডেট করতে পারবেন
+    // 💡 নিচে আপনার বইয়ের তালিকা দেওয়া হলো। 
+    // নতুন বই যোগ করতে, কমা (,) দিয়ে নতুন { ... } ব্লক তৈরি করুন। 
+    // কোনো তথ্য না থাকলে ফাঁকা ('') রাখুন বা 0 দিন।
+
     const books = [
-      { num: '০১', name: 'সাপ্লিমেন্ট বই', mrp: 350, buy: 290, sell: 400, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০২', name: 'হান্টিং এডেলিন সিরিজ (২ বই)', mrp: 750, buy: 370, sell: 640, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০৩', name: 'কাঠগোলাপ', mrp: 266, buy: 100, sell: 210, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০৪', name: 'ক্লাস ৮ আদিল ফুল সেট গাইড', mrp: null, buy: 2300, sell: 2400, buyNote: '১৫% ডিসকাউন্টে', buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০৫', name: 'কোহিনূর ২', mrp: 800, buy: 480, sell: 600, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০৬', name: 'কোহিনূর ১', mrp: 280, buy: null, sell: null, sellNote: 'বিক্রি হয়নি', buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০৭', name: 'পথের পাঁচালী', mrp: 330, buy: null, sell: 280, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০৮', name: 'এডেলিন', mrp: 650, buy: null, sell: null, sellNote: 'বিক্রি হয়নি', buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
-      { num: '০৯', name: 'কোহিনূর ২ (২য় কপি)', mrp: 800, buy: 480, sell: 600, buyDate: '', sellDate: '', buyers: '', orderedBy: '', miscCost: 0, miscDesc: '' },
+      { 
+        num: '০১', 
+        name: 'সাপ্লিমেন্ট বই', 
+        mrp: 350,               // গায়ের মূল্য (MRP)
+        buy: 290,               // কেনা মূল্য
+        sell: 400,              // বিক্রি মূল্য
+        buyDate: '',            // কেনার তারিখ (যেমন: '২০ এপ্রিল')
+        sellDate: '',           // বিক্রির তারিখ
+        buyers: '',             // কেনার জন্য কে কে গেছে (যেমন: 'তামিম, মেহেদী')
+        orderedBy: '',          // কে অর্ডার করেছে
+        miscCost: 0,            // বিবিধ খরচ (টাকায়)
+        miscDesc: '',           // বিবিধ খরচের বিবরণ (যেমন: 'গাড়ি ভাড়া')
+        buyNote: '',            // কেনার সময় কোনো নোট
+        sellNote: ''            // বিক্রির সময় কোনো নোট
+      },
+      { 
+        num: '০২', 
+        name: 'হান্টিং এডেলিন সিরিজ (২ বই)', 
+        mrp: 750, 
+        buy: 370, 
+        sell: 640, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '', sellNote: '' 
+      },
+      { 
+        num: '০৩', 
+        name: 'কাঠগোলাপ', 
+        mrp: 266, 
+        buy: 100, 
+        sell: 210, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '', sellNote: '' 
+      },
+      { 
+        num: '০৪', 
+        name: 'ক্লাস ৮ আদিল ফুল সেট গাইড', 
+        mrp: null, 
+        buy: 2300, 
+        sell: 2400, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '১৫% ডিসকাউন্টে', sellNote: '' 
+      },
+      { 
+        num: '০৫', 
+        name: 'কোহিনূর ২', 
+        mrp: 800, 
+        buy: 480, 
+        sell: 600, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '', sellNote: '' 
+      },
+      { 
+        num: '০৬', 
+        name: 'কোহিনূর ১', 
+        mrp: 280, 
+        buy: null, 
+        sell: null, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '', sellNote: 'বিক্রি হয়নি' 
+      },
+      { 
+        num: '০৭', 
+        name: 'পথের পাঁচালী', 
+        mrp: 330, 
+        buy: null, 
+        sell: 280, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '', sellNote: '' 
+      },
+      { 
+        num: '০৮', 
+        name: 'এডেলিন', 
+        mrp: 650, 
+        buy: null, 
+        sell: null, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '', sellNote: 'বিক্রি হয়নি' 
+      },
+      { 
+        num: '০৯', 
+        name: 'কোহিনূর ২ (২য় কপি)', 
+        mrp: 800, 
+        buy: 480, 
+        sell: 600, 
+        buyDate: '', sellDate: '', buyers: '', orderedBy: '', 
+        miscCost: 0, miscDesc: '', buyNote: '', sellNote: '' 
+      }
     ];
+
+    // ============================================
+    // নিচের কোডগুলোতে আর হাত দেওয়ার দরকার নেই
+    // ============================================
 
     function tk(n) { return n != null ? '৳' + n.toLocaleString('bn-BD') : null; }
     function pct(profit, cost) { return cost ? ((profit / cost) * 100).toFixed(1) : null; }
@@ -509,6 +305,24 @@
       if (b.mrp && b.buy) {
         const d = ((b.mrp - b.buy) / b.mrp) * 100;
         return d.toFixed(1) + '%';
+      }
+      return '—';
+    }
+
+    function getSellDiscount(b) {
+      if (b.mrp && b.sell) {
+        if (b.sell >= b.mrp) return 'নাই';
+        const d = ((b.mrp - b.sell) / b.mrp) * 100;
+        return d.toFixed(1) + '%';
+      }
+      return '—';
+    }
+
+    function getProfitPercentage(b) {
+      if (b.buy && b.sell) {
+        const profit = b.sell - b.buy;
+        const p = (profit / b.buy) * 100;
+        return (p > 0 ? '+' : '') + p.toFixed(1) + '%';
       }
       return '—';
     }
@@ -617,7 +431,7 @@
             <span class="lbl">বিবিধ খরচ ${b.miscDesc ? `<span class="m" style="font-size:0.75rem">(${b.miscDesc})</span>` : ''}</span>
             <span class="val">${b.miscCost ? '+ ৳' + b.miscCost.toLocaleString('bn-BD') : '<span class="m">নেই</span>'}</span>
           </div>
-          <div class="card-row" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
+          <div class="card-row" style="border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px;">
             <span class="lbl">মোট ব্যয় (বই + বিবিধ)</span>
             <span class="val">${totalCost ? '৳' + totalCost.toLocaleString('bn-BD') : '<span class="m">—</span>'}</span>
           </div>
@@ -625,6 +439,14 @@
           <div class="card-row" style="margin-top: 8px;">
             <span class="lbl">বিক্রি মূল্য</span>
             <span class="val">${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="y">${b.sellNote || 'তথ্য নেই'}</span>`}</span>
+          </div>
+          <div class="card-row">
+            <span class="lbl">বিক্রয় ডিসকাউন্ট (MRP থেকে)</span>
+            <span class="val" style="color: #ff758c;">${getSellDiscount(b)}</span>
+          </div>
+          <div class="card-row">
+            <span class="lbl">লাভের হার (কেনা দাম থেকে)</span>
+            <span class="val" style="color: #00e5a0;">${getProfitPercentage(b)}</span>
           </div>
           
           <div class="card-row" style="margin-top: 6px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.15);">
@@ -666,6 +488,8 @@
           <td>${b.miscCost ? '৳' + b.miscCost.toLocaleString('bn-BD') + (b.miscDesc ? `<br><span style="font-size:0.7rem;color:var(--muted)">(${b.miscDesc})</span>` : '') : '<span class="td-m">—</span>'}</td>
           <td style="font-weight: 600;">${totalCost ? '৳' + totalCost.toLocaleString('bn-BD') : '<span class="td-m">—</span>'}</td>
           <td>${b.sell ? '৳' + b.sell.toLocaleString('bn-BD') : `<span class="td-y">${b.sellNote || 'তথ্য নেই'}</span>`}</td>
+          <td style="color: #ff758c;">${getSellDiscount(b)}</td>
+          <td style="color: #00e5a0; font-weight: 600;">${getProfitPercentage(b)}</td>
           <td class="${profit === null ? 'td-m' : profit >= 0 ? 'td-g' : 'td-r'}" style="font-size: 1rem;">
             ${profit === null ? '—' : (profit >= 0 ? '+' : '') + '৳' + profit.toLocaleString('bn-BD')}
           </td>
